@@ -424,7 +424,10 @@ class terminal(Command):
             command = 'x-terminal-emulator'
         if command not in get_executables():
             command = 'xterm'
+        tmp = os.environ['RANGER_LEVEL']
+        del os.environ['RANGER_LEVEL']
         self.fm.run(command, flags='f')
+        os.environ['RANGER_LEVEL'] = tmp
 
 
 class delete(Command):
