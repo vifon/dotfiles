@@ -196,6 +196,10 @@ class shell(Command):
             if '%' in command:
                 command = self.fm.substitute_macros(command, escape=True)
             self.fm.execute_command(command, flags=flags)
+            if command == "$SHELL":
+                with open("/tmp/rangershelldir", "r") as f:
+                    self.fm.cd(f.readline().strip())
+                os.unlink("/tmp/rangershelldir")
 
     def tab(self):
         from ranger.ext.get_executables import get_executables
