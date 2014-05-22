@@ -1249,3 +1249,16 @@ class log(Command):
 
         pager = os.environ.get('PAGER', ranger.DEFAULT_PAGER)
         self.fm.run([pager, tmp.name])
+
+class fasd(Command):
+    """
+    :fasd
+
+    Jump to directory using fasd
+    """
+    def execute(self):
+        arg = self.rest(1)
+        if arg:
+            import subprocess
+            directory = subprocess.check_output(["fasd", "-d"]+arg.split(), universal_newlines=True).strip()
+            self.fm.cd(directory)
