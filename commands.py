@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2009-2013  Roman Zimbelmann <hut@lavabit.com>
+# Copyright (C) 2009-2013  Roman Zimbelmann <hut@lepus.uberspace.de>
 # This configuration file is licensed under the same terms as ranger.
 # ===================================================================
 # This file contains ranger's commands.
@@ -42,9 +42,9 @@
 #      the user pressed 6X, self.quantifier will be 6.
 # self.arg(n): The n-th argument, or an empty string if it doesn't exist.
 # self.rest(n): The n-th argument plus everything that followed.  For example,
-#      If the command was "search foo bar a b c", rest(2) will be "bar a b c"
-# self.start(n): The n-th argument and anything before it.  For example,
-#      If the command was "search foo bar a b c", rest(2) will be "bar a b c"
+#      if the command was "search foo bar a b c", rest(2) will be "bar a b c"
+# self.start(n): Anything before the n-th argument.  For example, if the
+#      command was "search foo bar a b c", start(2) will be "search foo"
 #
 # ===================================================================
 # And this is a little reference for common ranger functions and objects:
@@ -154,7 +154,8 @@ class cd(Command):
             pass
         else:
             dirnames.sort()
-            dirnames = bookmarks + dirnames
+            if self.fm.settings.cd_bookmarks:
+                dirnames = bookmarks + dirnames
 
             # no results, return None
             if len(dirnames) == 0:
@@ -428,10 +429,7 @@ class terminal(Command):
             command = 'x-terminal-emulator'
         if command not in get_executables():
             command = 'xterm'
-        tmp = os.environ['RANGER_LEVEL']
-        del os.environ['RANGER_LEVEL']
         self.fm.run(command, flags='f')
-        os.environ['RANGER_LEVEL'] = tmp
 
 
 class delete(Command):
@@ -1202,7 +1200,7 @@ class diff(Command):
     """
     :diff
 
-    Displays a diff of selected files against last last commited version
+    Displays a diff of selected files against the last committed version
     """
     def execute(self):
         from ranger.ext.vcs import VcsError
