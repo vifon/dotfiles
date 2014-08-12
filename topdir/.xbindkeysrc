@@ -1,0 +1,175 @@
+# -*- shell-script -*-
+
+"CLEARONSTART=1 urxvtcd"
+    Mod4 + space
+"CLEARONSTART=1 tabbed -c urxvtcd -embed"
+    Mod4 + Control + space
+# "urxvtcd -pe tabbedex"
+#     Mod4 + Control + space
+
+"emacsclient -c"
+    Mod4 + e
+"emacs"
+    Mod4 + Control + e
+
+"rox"
+    Mod4 + Control + grave
+
+"sudo /home/vifon/.bin/mysuspend"
+    Mod4 + Shift + F4
+
+"chromium $(xclip -o)"
+    Mod4 + Mod1 + o
+
+"wxmaxima"
+    XF86Calculator
+
+"urxvtcd -g 150x32 -e ncmpcpp-run"
+    Mod4 + Shift + m
+"urxvtcd -g 80x26 -e youtube-run"
+    Mod4 + Control + m
+"amixer set Master toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
+    XF86AudioMute
+"amixer set Speaker toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
+    Mod1 + XF86AudioMute
+"mpcauth -q volume -5 || amixer set Master 5%- && killall -USR1 i3status"
+    XF86AudioLowerVolume
+"mpcauth -q volume +5 || amixer set Master 5%+ && killall -USR1 i3status"
+    XF86AudioRaiseVolume
+"mpcauth -q  prev"
+    Mod4 + Control + comma
+"mpcauth -q  prev"
+    XF86AudioPrev
+"mpcauth -q  next"
+    Mod4 + Control + period
+"mpcauth -q  next"
+    XF86AudioNext
+"mpcauth -q  stop"
+    XF86AudioStop
+"mpcauth -q  toggle"
+    XF86AudioPlay
+"mpcauth -q  toggle"
+    Mod4 + grave
+"mpcauth -q  toggle"
+    Mod4 + slash
+"mpcauth -q  stop"
+    Mod4 + Control + slash
+"mpcauth -q  toggle"
+    Mod4 + Escape
+
+"urxvtcd -g 150x50 -e alsamixer"
+    Mod4 + XF86AudioMute
+
+"ps xo pid=,command= | dmenu -l 16 | sed 's/\s*\([0-9]\+\) .*/\1/' | xargs kill"
+    Mod4 + Pause
+
+
+"urxvtcd -e xmpp-run"
+    Mod4 + F9
+"urxvtcd -e xmpp-run --mosh"
+    Mod4 + Control + F9
+"GTK2_RC_FILES=$HOME/.gtkrc-2.0-pidgin pidgin"
+    Mod4 + Shift + F9
+"urxvtcd -e xmpp-run"
+    XF86Messenger
+"urxvtcd -e mutt -F ~/.muttrc_pop"
+    Mod4 + Control + F8
+"urxvtcd -title IRC -e wbd"
+    Mod4 + F10
+"urxvtcd -title 'IRC [mosh]' -e wbd --mosh"
+    Mod4 + Control + F10
+"urxvtcd -title IRC -e wbd"
+    XF86Search
+
+"dmenu_launcher"
+    XF86Launch1
+
+"dmenu_launcher"
+    Mod4 + y
+
+"env MAN='urxvtcd -e colorman' dmenu_man"
+    Mod4 + m
+"dmenu_translate -g"
+    Mod4 + backslash
+"dmenu_translate -g -f pl -t en"
+    Mod4 + Shift + backslash
+
+"scrot-upload"
+    Print
+"scrot-upload 1"
+    Mod4 + Print
+"scrot -s"
+    Control + Print
+
+"eject /dev/sr0"
+    XF86Eject
+
+"vlock -ans"
+    Mod4 + Control + i
+"i3lock-scrot"
+    XF86ScreenSaver
+"i3lock-scrot -d"
+    Control + XF86ScreenSaver
+
+"doublemouse"
+    Mod4 + minus
+
+"xrandr --output LVDS1 --auto --primary --output VGA1 --off"
+    Mod4 + Control + Home
+"xrandr --output LVDS1 --off --output VGA1 --auto --primary"
+    Mod4 + Control + End
+"xrandr --output LVDS1 --auto --primary --output VGA1 --auto --right-of LVDS1"
+    Mod4 + Control + Delete
+
+"~/.startup 1"
+    Mod4 + Insert
+
+"~/.startup --reset-mouse"
+    Mod4 + Control + Insert
+
+"~/.startup 1 && xmodmap -e 'remove control = Control_L' -e 'keycode 37 = Super_L' -e 'add control = Control_L' -e 'add mod4 = Super_L'"
+    Mod1 + Control + Insert
+
+"bluetooth-toggle"
+    Mod4 + Shift + F5
+
+
+"powermode powersave+"
+    Mod4 + Shift + Next
+
+"powermode powersave"
+    Mod4 + Next
+
+"powermode normal"
+    Mod4 + Prior
+
+"powermode maxpowuh"
+    Mod4 + Shift + Prior
+
+
+"sleep 0.5 && xset dpms force off"
+    Mod4 + Shift + XF86Back
+
+"xbacklight2 save 0"
+    Mod4 + XF86Back
+
+"xbacklight2 restore"
+    Mod4 + XF86Forward
+
+"xbacklight2 save 100"
+    Mod4 + Shift + XF86Forward
+
+
+# "xcalib -invert -alter"
+#     m:0x1 + c:62
+# "xcalib -invert -alter"
+#     m:0x1 + c:50
+"xcalib -invert -alter"
+    Mod4 + Shift + BackSpace
+
+"redshift -O 3700"
+    Mod4 + Shift + Right
+"redshift -O 4500"
+    Mod4 + Shift + Down
+"redshift -x"
+    Mod4 + Shift + Left
