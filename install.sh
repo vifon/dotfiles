@@ -1,3 +1,3 @@
 #!/bin/bash
 
-stow -v -t $HOME topdir
+stow -v "$@" -t $HOME topdir
