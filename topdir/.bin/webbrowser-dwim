@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+URL=$1
+RESPONSE=$(curl -s -I $URL)
+MIME=$(sed -n 's/^Content-Type: \([^;]*\).*/\1/p' <<< $RESPONSE)
+
+CODE=$(sed -n 's/^HTTP\/[.0-9]\+ \([0-9]*\) .*/\1/p' <<< $RESPONSE)
+
+case $CODE in
+    404)
+        zenity --info --title Dispatcher --text 404
+        exit 1
+        ;;
+esac
+
+# if [[ "$URL" =~ '\.(png|jpeg|jpg|gif)\b' ]]; then
+if [[ "$MIME" =~ 'image/' ]]; then
+    exec webrun sxiv "$URL"
+# elif [[ "$URL" =~ '\.(pdf)\b' ]]; then
+elif [[ "$MIME" =~ 'video/' ]]; then
+    exec mplayer "$URL"
+elif [[ "$MIME" =~ 'application/pdf' ]]; then
+    exec webrun evince "$URL"
+elif [[ "$MIME" =~ 'text/plain' ]]; then
+    exec webrun e "$URL"
+else
+    if [ "`ps -p $PPID -o comm=`" = "urxvtd" ]; then
+        exec luakit "$URL"
+    else
+        exec chromium --incognito "$URL"
+    fi
+fi
