@@ -1,0 +1,23 @@
+vbell_msg "bell: window ~%" # Message for visual bell
+vbellwait 2 # Seconds to pause the screen for visual bell
+vbell off # Turns of visual bell
+startup_message off
+autodetach on
+defutf8 on
+altscreen on
+
+escape ^Zz
+
+bind ' ' windowlist -b
+bind = resize
+bind b blanker
+bind ^b blanker
+bind ` select 0
+bind - split
+
+defscrollback 5000
+
+maptimeout 0
+defc1 off
+
+sorendition 10 07
