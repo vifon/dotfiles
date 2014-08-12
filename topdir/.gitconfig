@@ -1,0 +1,87 @@
+# -*- conf -*-
+# vim: fdm=marker :
+[include]
+    path = ~/.gitauth
+[color]
+    ui = true
+[color.diff]
+    meta = yellow bold
+    func = magenta bold
+[core]
+    editor = emacsclient -c
+    pager  = less
+	excludesfile = ~/.gitignore
+	quotepath = false
+[mergetool.ediff]
+    cmd = emacs --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
+    trustExitCode = false
+[mergetool.p4merge]
+    cmd = "p4merge $BASE $LOCAL $REMOTE $MERGED"
+    keepTemporaries = false
+    trustExitCode = false
+    keepBackup = false
+[merge]
+    tool = kdiff3
+
+
+[difftool.p4merge]
+    cmd = "p4merge $LOCAL $REMOTE"
+[difftool]
+    prompt = false
+[diff]
+    tool = kdiff3
+
+
+[rebase]
+    autosquash = true
+
+[alias]
+    unstage        = reset HEAD --
+    visual         = !gitk --all
+    animate        = !gource
+    cd             = checkout
+    ls             = status --short
+    a              = add
+    au             = add --update
+    ap             = add --patch
+    co             = commit
+    coa            = commit --amend
+    coam           = commit --amend --no-edit
+    com            = commit -m
+    r              = rebase
+    ri             = !GIT_EDITOR=vim git rebase -i
+    restore        = checkout -- \\*
+    quicklog       = !git log --decorate --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset %C(bold blue)<%an>%Creset %Cgreen(%ar)%Creset %s' | head -n 30
+    ql             = !git quicklog
+    graph          = "!fun() { git log --graph --decorate --color --pretty=format:'%C(auto)%h%Creset %C(bold blue)<%<(10,trunc)%an>%Creset %Cgreen(%<(14,trunc)%ar)%Creset%C(auto)%d%Creset %s' $*; }; fun"
+    graphmark      = "!fun() { git graph $* | ack --color --passthru `git rev-parse HEAD 2> /dev/null | sed 's/^\\(.\\{7\\}\\).*$/\\1/'` 2> /dev/null; }; fun"
+    g              = !git graph --all
+    gg             = !git graph | most
+    gf             = !git graph --first-parent
+    configure      = !vim ~/.gitconfig
+    d              = diff
+    ds             = diff --staged
+    dw             = diff --color-words
+    diffw          = diff --color-words
+    clean-rm       = !git ls-files --deleted | xargs -d \\\\n git rm
+    addremove      = !git clean-rm && git add -A
+    ar             = !git clean-rm && git add -A
+    rerere-enable  = !touch .git/rr-cache
+    forget         = rm --cached
+    rescue         = !git graph $(git rev-list -g --all)
+    rescuek        = !gitk $(git rev-list -g --all)
+
+    ribbon         = tag --force _ribbon origin/master
+    catchup        = log --patch --reverse --topo-order _ribbon..origin/master
+[gui]
+    spellingdictionary = none
+[advice]
+    detachedHead = false
+[instaweb]
+    browser = luakit
+    httpd = lighttpd
+    port = 30080
+[browser.luakit]
+    cmd = luakit
+[push]
+    default = matching
