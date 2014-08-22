@@ -73,6 +73,7 @@
     forget         = rm --cached
     rescue         = !git graph $(git rev-list -g --all)
     rescuek        = !gitk $(git rev-list -g --all)
+    f              = "!fun() { git forest --sha \"$@\" | less -RXFS; }; fun"
 
     ribbon         = tag --force _ribbon origin/master
     catchup        = log --patch --reverse --topo-order _ribbon..origin/master
