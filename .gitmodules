@@ -1,0 +1,3 @@
+[submodule "submodules/git-fff"]
+	path = submodules/git-fff
+	url = https://github.com/xender/git-fff
