@@ -71,8 +71,8 @@
     ar             = !git clean-rm && git add -A
     rerere-enable  = !touch .git/rr-cache
     forget         = rm --cached
-    rescue         = !git graph $(git rev-list -g --all)
-    rescuek        = !gitk $(git rev-list -g --all)
+    rescue         = !git rev-list -g --all | xargs git graph
+    rescuek        = !git rev-list -g --all | xargs gitk
     f              = "!fun() { git forest --sha \"$@\" | less -RXFS; }; fun"
 
     ribbon         = tag --force _ribbon origin/master
