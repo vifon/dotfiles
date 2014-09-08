@@ -58,7 +58,7 @@
     ql             = !git quicklog
     graph          = "!fun() { git log --graph --decorate --color --pretty=format:'%C(auto)%h%Creset %C(bold blue)<%<(10,trunc)%an>%Creset %Cgreen(%<(14,trunc)%ar)%Creset%C(auto)%d%Creset %s' \"$@\"; }; fun"
     graphmark      = "!fun() { git graph \"$@\" | ack --color --passthru `git rev-parse HEAD 2> /dev/null | sed 's/^\\(.\\{7\\}\\).*$/\\1/'` 2> /dev/null; }; fun"
-    g              = !git graph --all
+    g              = !git graph
     gg             = !git graph | most
     gf             = !git graph --first-parent
     configure      = !vim ~/.gitconfig
