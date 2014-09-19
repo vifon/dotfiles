@@ -226,4 +226,4 @@ source /usr/share/gdb/gdb-stl-views/gdb-stl-views.gdb
 set print pretty
 set print array
 
-source ~/.gdb_colors.gdb
+# source ~/.gdb_colors.gdb
