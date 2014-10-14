@@ -75,6 +75,8 @@
     rescuek        = !git rev-list -g --all | xargs gitk
     f              = "!fun() { git forest --sha \"$@\" | less -RXFS; }; fun"
     ff             = merge --ff-only '@{u}'
+    undo           = checkout '@{1}'
+    unfuck         = reset --hard '@{1}'
 
     ribbon         = tag --force _ribbon origin/master
     catchup        = log --patch --reverse --topo-order _ribbon..origin/master
