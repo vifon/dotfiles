@@ -1260,3 +1260,23 @@ class fasd(Command):
             import subprocess
             directory = subprocess.check_output(["fasd", "-d"]+arg.split(), universal_newlines=True).strip()
             self.fm.cd(directory)
+
+
+
+import signal
+def zranger_chdir_handler(signal, frame):
+    with open("/tmp/zranger-cwd", "r") as f:
+        Command.fm.cd(f.readline().strip())
+        os.unlink("/tmp/zranger-cwd")
+signal.signal(signal.SIGUSR1, zranger_chdir_handler)
+
+class tmux_detach(Command):
+    """
+    :tmux_detach
+
+    Detach from this tmux session (if inside tmux).
+    """
+    def execute(self):
+        if not os.environ.get('TMUX'):
+            return
+        os.system("tmux detach")
