@@ -11,4 +11,4 @@ while getopts "s" ARG; do
 done
 shift $[$OPTIND-1]
 
-stow -v "$@" -t $HOME topdir
+stow -v "$@" -t $HOME -d topdir topdir/*(:t)
