@@ -11,6 +11,8 @@
     Mod4 + e
 "emacs"
     Mod4 + Control + e
+"emacsclient -c --eval '(mu4e)'"
+    Mod4 + F9
 
 "rox"
     Mod4 + Control + grave
@@ -64,10 +66,6 @@
     Mod4 + Pause
 
 
-"urxvtcd -e xmpp-run"
-    Mod4 + F9
-"urxvtcd -e xmpp-run --mosh"
-    Mod4 + Control + F9
 "GTK2_RC_FILES=$HOME/.gtkrc-2.0-pidgin pidgin"
     Mod4 + Shift + F9
 "urxvtcd -e xmpp-run"
