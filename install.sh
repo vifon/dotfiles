@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
-while getopts "s" ARG; do
+while getopts "ns" ARG; do
     case "$ARG" in
+        n)
+            DRYRUN="-n"
+            ;;
         s)
             git submodule update --init
             ;;
@@ -11,4 +14,10 @@ while getopts "s" ARG; do
 done
 shift $[$OPTIND-1]
 
-stow -v "$@" -t $HOME -d topdir topdir/*(:t)
+if [ $# = 0 ]; then
+    PACKAGES=(topdir/*(:t))
+else
+    PACKAGES=$argv
+fi
+
+stow $DRYRUN -v -t $HOME -d topdir ${=PACKAGES}
