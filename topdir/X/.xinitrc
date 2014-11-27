@@ -19,7 +19,7 @@ case $SESSION in
     awesome)
         wmname LG3D; exec awesome ;;
     i3)
-        exec i3 ;;
+        exec $HOME/local/bin/i3 || exec i3 ;;
     kde)
         exec startkde ;;
     xmonad)
