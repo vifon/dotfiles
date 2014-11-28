@@ -689,6 +689,18 @@ class rename(Command):
     def tab(self):
         return self._tab_directory_content()
 
+class renameConsole(Command):
+    """:renameConsole
+
+    Creates an open_console for the rename command, automatically placing the cursor before the file extension.
+    """
+
+    def execute(self):
+        if "." in self.fm.thisfile.basename:
+            offset = 6 + len(self.fm.thisfile.basename) - self.fm.thisfile.basename[::-1].index('.')
+            self.fm.open_console('rename ' + self.fm.thisfile.basename, position=offset)
+        else:
+            self.fm.open_console('rename ' + self.fm.thisfile.basename)
 
 class chmod(Command):
     """:chmod <octal number>
@@ -927,6 +939,9 @@ class map_(Command):
     resolve_macros = False
 
     def execute(self):
+        if not self.arg(1) or not self.arg(2):
+            return self.fm.notify("Not enough arguments", bad=True)
+
         self.fm.ui.keymaps.bind(self.context, self.arg(1), self.rest(2))
 
 
@@ -1037,7 +1052,10 @@ class scout(Command):
 
         if self.KEEP_OPEN in flags and thisdir != self.fm.thisdir:
             # reopen the console:
-            self.fm.open_console(self.line[0:-len(pattern)])
+            if not pattern:
+                self.fm.open_console(self.line)
+            else:
+                self.fm.open_console(self.line[0:-len(pattern)])
 
         if thisdir != self.fm.thisdir and pattern != "..":
             self.fm.block_input(0.5)
@@ -1247,6 +1265,25 @@ class log(Command):
 
         pager = os.environ.get('PAGER', ranger.DEFAULT_PAGER)
         self.fm.run([pager, tmp.name])
+
+class flat(Command):
+    """
+    :flat <level>
+
+    Flattens the directory view up to level specified.
+        -1 fully flattened
+        0  remove flattened view
+    """
+
+    def execute(self):
+        try:
+            level = self.rest(1)
+            level = int(level)
+        except ValueError:
+            level = self.quantifier
+        self.fm.thisdir.unload()
+        self.fm.thisdir.flat = level
+        self.fm.thisdir.load_content()
 
 class fasd(Command):
     """
