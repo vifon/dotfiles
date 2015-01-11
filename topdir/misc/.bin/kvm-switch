@@ -1,0 +1,21 @@
+#!/bin/bash
+
+FLAGFILE="/tmp/kvm-switch-marker"
+
+if [ -e $FLAGFILE ]; then
+    # blink the LED
+    xset led 3
+    sleep 0.2
+    xset -led 3
+
+    sleep 0.2
+
+    # repeat just to be sure
+    xset led 3
+    sleep 0.2
+    xset -led 3
+else
+    touch $FLAGFILE
+    sleep 2
+    rm -f $FLAGFILE
+fi

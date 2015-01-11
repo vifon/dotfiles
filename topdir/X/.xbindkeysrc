@@ -20,6 +20,9 @@
 "sudo /home/vifon/.bin/mysuspend"
     Mod4 + Shift + F4
 
+"kvm-switch"
+    Scroll_Lock
+
 "chromium $(xclip -o)"
     Mod4 + Mod1 + o
 
