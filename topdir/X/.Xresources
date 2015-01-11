@@ -116,4 +116,6 @@ URxvt.keysym.M-apostrophe: perl:aAtt:complete
 URxvt*keysym.M-o: perl:cwd-spawn
 
 
+rofi.terminal: urxvtcd
+
 !Xcursor.theme: whiteglass
