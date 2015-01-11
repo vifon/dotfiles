@@ -1285,6 +1285,7 @@ class flat(Command):
         self.fm.thisdir.flat = level
         self.fm.thisdir.load_content()
 
+import subprocess
 class fasd(Command):
     """
     :fasd
@@ -1294,7 +1295,6 @@ class fasd(Command):
     def execute(self):
         arg = self.rest(1)
         if arg:
-            import subprocess
             directory = subprocess.check_output(["fasd", "-d"]+arg.split(), universal_newlines=True).strip()
             self.fm.cd(directory)
 
