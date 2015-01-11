@@ -30,6 +30,8 @@
     XF86Calculator
 
 "urxvtcd -g 150x32 -e ncmpcpp-run"
+    Mod4 + m
+"urxvtcd -g 150x32 -e vimpc"
     Mod4 + Shift + m
 "urxvtcd -g 80x26 -e youtube-run"
     Mod4 + Control + m
@@ -88,8 +90,6 @@
 "dmenu_launcher"
     Mod4 + y
 
-"env MAN='urxvtcd -e colorman' dmenu_man"
-    Mod4 + m
 "dmenu_translate -g"
     Mod4 + backslash
 "dmenu_translate -g -f pl -t en"
