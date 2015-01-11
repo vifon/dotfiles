@@ -2,6 +2,7 @@
 keycode 94  = Shift_L
 add shift = Shift_L
 
-! NumLock as CapsLock (because CapsLock is Ctrl)
-keycode 78  = Caps_Lock
-add lock    = Caps_Lock
+! Disabled due to the KVM issues
+!! ScrollLock as CapsLock (because CapsLock is Ctrl)
+!keycode 78  = Caps_Lock
+!add lock    = Caps_Lock
