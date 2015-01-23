@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2009-2013  Roman Zimbelmann <hut@lepus.uberspace.de>
+# Copyright (C) 2009-2013  Roman Zimbelmann <hut@hut.pm>
 # This configuration file is licensed under the same terms as ranger.
 # ===================================================================
 # This file contains ranger's commands.
@@ -107,7 +107,8 @@ class cd(Command):
             self.shift()
             destination = os.path.realpath(self.rest(1))
             if os.path.isfile(destination):
-                destination = os.path.dirname(destination)
+                self.fm.select_file(destination)
+                return
         else:
             destination = self.rest(1)
 
@@ -383,6 +384,43 @@ class setintag(setlocal):
         self.shift()
         name, value, _ = self.parse_setting_line()
         self.fm.set_option_from_string(name, value, tags=tags)
+
+
+class default_linemode(Command):
+    def execute(self):
+        import re
+        from ranger.container.fsobject import POSSIBLE_LINEMODES
+
+        if len(self.args) < 2:
+            self.fm.notify("Usage: default_linemode [path=<regexp> | tag=<tag(s)>] <linemode>", bad=True)
+
+        # Extract options like "path=..." or "tag=..." from the command line
+        arg1 = self.arg(1)
+        method = "always"
+        argument = None
+        if arg1.startswith("path="):
+            method = "path"
+            argument = re.compile(arg1[5:])
+            self.shift()
+        elif arg1.startswith("tag="):
+            method = "tag"
+            argument = arg1[4:]
+            self.shift()
+
+        # Extract and validate the line mode from the command line
+        linemode = self.rest(1)
+        if linemode not in POSSIBLE_LINEMODES:
+            self.fm.notify("Invalid linemode: %s; should be %s" %
+                    (linemode, "/".join(POSSIBLE_LINEMODES)), bad=True)
+
+        # Add the prepared entry to the fm.default_linemodes
+        entry = [method, argument, linemode]
+        self.fm.default_linemodes.appendleft(entry)
+
+        # Redraw the columns
+        if hasattr(self.fm.ui, "browser"):
+            for col in self.fm.ui.browser.columns:
+                col.need_redraw = True
 
 
 class quit(Command):
@@ -689,18 +727,18 @@ class rename(Command):
     def tab(self):
         return self._tab_directory_content()
 
-class renameConsole(Command):
-    """:renameConsole
+class rename_append(Command):
+    """:rename_append
 
     Creates an open_console for the rename command, automatically placing the cursor before the file extension.
     """
 
     def execute(self):
-        if "." in self.fm.thisfile.basename:
-            offset = 6 + len(self.fm.thisfile.basename) - self.fm.thisfile.basename[::-1].index('.')
-            self.fm.open_console('rename ' + self.fm.thisfile.basename, position=offset)
+        cf = self.fm.thisfile
+        if cf.basename.find('.') != 0 and cf.basename.rfind('.') != -1 and not cf.is_directory:
+            self.fm.open_console('rename ' + cf.basename, position=(7 + cf.basename.rfind('.')))
         else:
-            self.fm.open_console('rename ' + self.fm.thisfile.basename)
+            self.fm.open_console('rename ' + cf.basename)
 
 class chmod(Command):
     """:chmod <octal number>
@@ -760,20 +798,19 @@ class bulkrename(Command):
 
         # Create and edit the file list
         filenames = [f.basename for f in self.fm.thistab.get_selection()]
-        listfile = tempfile.NamedTemporaryFile()
+        listfile = tempfile.NamedTemporaryFile(delete=False)
+        listpath = listfile.name
 
         if py3:
             listfile.write("\n".join(filenames).encode("utf-8"))
         else:
             listfile.write("\n".join(filenames))
-        listfile.flush()
-        self.fm.execute_file([File(listfile.name)], app='editor')
-        listfile.seek(0)
-        if py3:
-            new_filenames = listfile.read().decode("utf-8").split("\n")
-        else:
-            new_filenames = listfile.read().split("\n")
         listfile.close()
+        self.fm.execute_file([File(listpath)], app='editor')
+        listfile = open(listpath, 'r')
+        new_filenames = listfile.read().split("\n")
+        listfile.close()
+        os.unlink(listpath)
         if all(a == b for a, b in zip(filenames, new_filenames)):
             self.fm.notify("No renaming to be done!")
             return
@@ -1057,7 +1094,7 @@ class scout(Command):
             else:
                 self.fm.open_console(self.line[0:-len(pattern)])
 
-        if thisdir != self.fm.thisdir and pattern != "..":
+        if self.quickly_executed and thisdir != self.fm.thisdir and pattern != "..":
             self.fm.block_input(0.5)
 
     def cancel(self):
@@ -1152,6 +1189,33 @@ class scout(Command):
             i += 1
 
         return count == 1
+
+
+class filter_inode_type(Command):
+    """
+    :filter_inode_type [dfl]
+
+    Displays only the files of specified inode type. Parameters
+    can be combined.
+
+        d display directories
+        f display files
+        l display links
+    """
+
+    FILTER_DIRS  = 'd'
+    FILTER_FILES = 'f'
+    FILTER_LINKS = 'l'
+
+    def execute(self):
+        if not self.arg(1):
+            self.fm.thisdir.inode_type_filter = None
+        else:
+            self.fm.thisdir.inode_type_filter = lambda file: (
+                    True if ((self.FILTER_DIRS  in self.arg(1) and file.is_directory) or
+                             (self.FILTER_FILES in self.arg(1) and file.is_file and not file.is_link) or
+                             (self.FILTER_LINKS in self.arg(1) and file.is_link)) else False)
+        self.fm.thisdir.refilter()
 
 
 class grep(Command):
@@ -1270,9 +1334,10 @@ class flat(Command):
     """
     :flat <level>
 
-    Flattens the directory view up to level specified.
+    Flattens the directory view up to the specified level.
+
         -1 fully flattened
-        0  remove flattened view
+         0 remove flattened view
     """
 
     def execute(self):
@@ -1281,9 +1346,69 @@ class flat(Command):
             level = int(level)
         except ValueError:
             level = self.quantifier
+        if level < -1:
+            self.fm.notify("Need an integer number (-1, 0, 1, ...)", bad=True)
         self.fm.thisdir.unload()
         self.fm.thisdir.flat = level
         self.fm.thisdir.load_content()
+
+
+# Metadata commands
+# --------------------------------
+
+class prompt_metadata(Command):
+    """
+    :prompt_metadata <key1> [<key2> [<key3> ...]]
+
+    Prompt the user to input metadata for multiple keys in a row.
+    """
+
+    _command_name = "meta"
+    _console_chain = None
+    def execute(self):
+        prompt_metadata._console_chain = self.args[1:]
+        self._process_command_stack()
+
+    def _process_command_stack(self):
+        if prompt_metadata._console_chain:
+            key = prompt_metadata._console_chain.pop()
+            self._fill_console(key)
+        else:
+            for col in self.fm.ui.browser.columns:
+                col.need_redraw = True
+
+    def _fill_console(self, key):
+        metadata = self.fm.metadata.get_metadata(self.fm.thisfile.path)
+        if key in metadata and metadata[key]:
+            existing_value = metadata[key]
+        else:
+            existing_value = ""
+        text = "%s %s %s" % (self._command_name, key, existing_value)
+        self.fm.open_console(text, position=len(text))
+
+
+class meta(prompt_metadata):
+    """
+    :meta <key> [<value>]
+
+    Change metadata of a file.  Deletes the key if value is empty.
+    """
+
+    def execute(self):
+        key = self.arg(1)
+        value = self.rest(1)
+        update_dict = dict()
+        update_dict[key] = self.rest(2)
+        selection = self.fm.thistab.get_selection()
+        for f in selection:
+            self.fm.metadata.set_metadata(f.path, update_dict)
+        self._process_command_stack()
+
+    def tab(self):
+        key = self.arg(1)
+        metadata = self.fm.metadata.get_metadata(self.fm.thisfile.path)
+        if key in metadata and metadata[key]:
+            return self.arg(0) + " " + metadata[key]
 
 import subprocess
 class fasd(Command):
