@@ -9,6 +9,9 @@ xrandr --output LVDS1 --primary
 xrdb ~/.Xresources
 
 eval `ssh-agent`
+eval `gpg-agent --daemon`
+nm-applet &> /dev/null &
+traycalendar &> /dev/null &
 
 if [ -z "$SESSION" ]; then
     SESSION=i3
