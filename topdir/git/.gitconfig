@@ -75,6 +75,7 @@
     rescuek        = !git rev-list -g --all | xargs gitk
     f              = "!fun() { git forest --sha \"$@\" | less -RXFS; }; fun"
     ff             = merge --ff-only '@{u}'
+    unmerged       = branch --no-merged
     undo           = checkout '@{1}'
     unfuck         = reset --hard '@{1}'
 
