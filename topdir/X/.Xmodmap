@@ -6,3 +6,5 @@ add shift = Shift_L
 !! ScrollLock as CapsLock (because CapsLock is Ctrl)
 !keycode 78  = Caps_Lock
 !add lock    = Caps_Lock
+
+!add mod3 = Scroll_Lock
