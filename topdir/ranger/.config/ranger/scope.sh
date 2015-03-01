@@ -54,10 +54,10 @@ case "$extension" in
         exit 1;;
     rar)
         try unrar -p- lt "$path" && { dump | trim; exit 0; } || exit 1;;
-    # PDF documents:
-    pdf)
-        try pdftotext -l 10 -nopgbrk -q "$path" - && \
-            { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
+    # # PDF documents:
+    # pdf)
+    #     try pdftotext -l 10 -nopgbrk -q "$path" - && \
+    #         { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
     # BitTorrent Files
     torrent)
         try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
@@ -84,6 +84,8 @@ case "$mimetype" in
         exiftool "$path" && exit 5
         # Use sed to remove spaces so the output fits into the narrow window
         try mediainfo "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
+    application/pdf)
+        pdftoppm -f 1 -l 1 -scale-to-x 1680 -scale-to-y -1 -singlefile -jpeg -tiffcompression jpeg "$path" "${cached%.*}" && exit 6 || exit 1;;
 esac
 
 exit 1

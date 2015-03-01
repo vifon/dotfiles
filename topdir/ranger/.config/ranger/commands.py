@@ -611,11 +611,11 @@ class mkdir(Command):
 
     def execute(self):
         from os.path import join, expanduser, lexists
-        from os import mkdir
+        from os import makedirs
 
         dirname = join(self.fm.thisdir.path, expanduser(self.rest(1)))
         if not lexists(dirname):
-            mkdir(dirname)
+            makedirs(dirname)
         else:
             self.fm.notify("file/directory exists!", bad=True)
 
@@ -719,10 +719,10 @@ class rename(Command):
         if access(new_name, os.F_OK):
             return self.fm.notify("Can't rename: file already exists!", bad=True)
 
-        self.fm.rename(self.fm.thisfile, new_name)
-        f = File(new_name)
-        self.fm.thisdir.pointed_obj = f
-        self.fm.thisfile = f
+        if self.fm.rename(self.fm.thisfile, new_name):
+            f = File(new_name)
+            self.fm.thisdir.pointed_obj = f
+            self.fm.thisfile = f
 
     def tab(self):
         return self._tab_directory_content()
@@ -792,12 +792,14 @@ class bulkrename(Command):
     def execute(self):
         import sys
         import tempfile
+        from os.path import relpath
         from ranger.container.file import File
         from ranger.ext.shell_escape import shell_escape as esc
-        py3 = sys.version > "3"
+        py3 = sys.version_info[0] >= 3
 
         # Create and edit the file list
-        filenames = [f.basename for f in self.fm.thistab.get_selection()]
+        filenames = [relpath(f.path, start=self.fm.thisdir.path)
+                     for f in self.fm.thistab.get_selection()]
         listfile = tempfile.NamedTemporaryFile(delete=False)
         listpath = listfile.name
 
@@ -884,7 +886,25 @@ class help_(Command):
         elif self.quantifier == 3:
             self.fm.dump_settings()
         else:
-            self.fm.display_help()
+            def callback(answer):
+                if answer == "q":
+                    return
+                elif answer == "m":
+                    self.fm.display_help()
+                elif answer == "c":
+                    self.fm.dump_commands()
+                elif answer == "k":
+                    self.fm.dump_keybindings()
+                elif answer == "s":
+                    self.fm.dump_settings()
+                elif answer == "g":
+                    os.system("w3m https://github.com/hut/ranger/wiki/Official-user-guide")
+
+            c = self.fm.ui.console.ask(
+                "View [m]an page, [k]ey bindings,"
+                " [c]ommands, [s]ettings or [g]uide?"
+                " (press q to abort)", callback,
+                list("mkcsgq") + [chr(27)])
 
 
 class copymap(Command):
@@ -1423,7 +1443,15 @@ class fasd(Command):
             directory = subprocess.check_output(["fasd", "-d"]+arg.split(), universal_newlines=True).strip()
             self.fm.cd(directory)
 
-
+class fzfcd(Command):
+    def execute(self):
+        command="find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
+                 -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, stderr = fzf.communicate()
+        if fzf.returncode == 0:
+            directory = stdout.decode('utf-8').rstrip('\n')
+            self.fm.cd(directory)
 
 import signal
 def zranger_chdir_handler(signal, frame):
