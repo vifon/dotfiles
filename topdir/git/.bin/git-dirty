@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find "$@" -type d -name ".git" -print0 \
+    | parallel -n1 -0 'cd {//} && if ! git diff --quiet; then echo {//}; fi'

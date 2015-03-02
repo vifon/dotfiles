@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# USAGE: git fixup [commit hash or something]
+# Adds the staged changes to the specified commit.
+
+if [ -n "$1" ]; then
+    git stash --keep-index
+    git commit --fixup="$1" &&
+    GIT_EDITOR=vim git rebase --autosquash --interactive "$1~1"
+    git stash pop
+else
+    echo "Missing argument" 1>&2
+    exit 1
+fi
