@@ -17,7 +17,7 @@
 "rox"
     Mod4 + Control + grave
 
-"rofi -now"
+"rofi -show window"
     Mod4 + n
 
 "sudo /home/vifon/.bin/mysuspend"
