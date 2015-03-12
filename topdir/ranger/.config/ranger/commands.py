@@ -462,11 +462,14 @@ class terminal(Command):
     def execute(self):
         import os
         from ranger.ext.get_executables import get_executables
-        command = os.environ.get('TERMCMD', os.environ.get('TERM'))
-        if command not in get_executables():
-            command = 'x-terminal-emulator'
-        if command not in get_executables():
-            command = 'xterm'
+        if os.environ.get('TMUX'):
+            command = 'tmux split-window -h'
+        else:
+            command = os.environ.get('TERMCMD', os.environ.get('TERM'))
+            if command not in get_executables():
+                command = 'x-terminal-emulator'
+            if command not in get_executables():
+                command = 'xterm'
         self.fm.run(command, flags='f')
 
 
@@ -1470,3 +1473,10 @@ class tmux_detach(Command):
         if not os.environ.get('TMUX'):
             return
         os.system("tmux detach")
+
+if 'chdir_hook' in globals():
+    @chdir_hook
+    def urxvt_cwd_spawn_hook(prev, new):
+        from sys import stdout
+        stdout.write("\033]777;cwd-spawn;path;{cwd}\007".format(cwd=new))
+        stdout.flush()
