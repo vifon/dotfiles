@@ -147,3 +147,13 @@ if 'chdir_hook' in globals():
             from sys import stdout
             stdout.write("\033]777;cwd-spawn;path;{cwd}\007".format(cwd=new))
             stdout.flush()
+
+class selfdebug(Command):
+    def execute(self):
+        import pdb
+        from subprocess import check_output
+        from sys import stdout
+        term_reset_string = check_output(["reset"])
+        stdout.write(term_reset_string)
+        pdb.set_trace()
+        self.fm.exit()
