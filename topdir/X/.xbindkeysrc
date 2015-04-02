@@ -97,6 +97,8 @@
     Mod4 + backslash
 "dmenu_translate -g -f pl -t en"
     Mod4 + Shift + backslash
+"zsh -c 'urxvt -e less -R =(trans en:pl \"`xsel -o`\")'"
+    Mod4 + Control + backslash
 
 "scrot-upload"
     Print
