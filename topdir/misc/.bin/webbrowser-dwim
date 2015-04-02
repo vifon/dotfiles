@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+MINIBROWSER="chromium --incognito"
+FULLBROWSER="chromium --incognito"
+
 URL=$1
 RESPONSE=$(curl -s -I $URL)
 MIME=$(sed -n 's/^Content-Type: \([^;]*\).*/\1/p' <<< $RESPONSE)
@@ -18,15 +21,15 @@ if [[ "$MIME" =~ 'image/' ]]; then
     exec webrun sxiv "$URL"
 # elif [[ "$URL" =~ '\.(pdf)\b' ]]; then
 elif [[ "$MIME" =~ 'video/' ]]; then
-    exec mplayer "$URL"
+    exec webrun mpv "$URL"
 elif [[ "$MIME" =~ 'application/pdf' ]]; then
     exec webrun evince "$URL"
 elif [[ "$MIME" =~ 'text/plain' ]]; then
     exec webrun e "$URL"
 else
     if [ "`ps -p $PPID -o comm=`" = "urxvtd" ]; then
-        exec luakit "$URL"
+        exec $=MINIBROWSER "$URL"
     else
-        exec chromium --incognito "$URL"
+        exec $=FULLBROWSER "$URL"
     fi
 fi
