@@ -1,0 +1,10 @@
+#!/bin/bash
+
+finish() {
+    rm -f "$TMP"
+    exit
+}; trap finish EXIT INT TERM
+TMP=`mktemp -t i3lock.XXXXXX.png --tmpdir=/tmp`
+
+xwd -root | falcon-blur - $TMP 5 # from http://github.com/beamerkun/pngblur
+i3lock "$@" -i $TMP

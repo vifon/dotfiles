@@ -112,9 +112,9 @@
 
 "vlock -ans"
     Mod4 + Control + i
-"i3lock-scrot"
+"i3lock-blur"
     XF86ScreenSaver
-"i3lock-scrot -d"
+"i3lock-blur -d"
     Control + XF86ScreenSaver
 
 "doublemouse"
