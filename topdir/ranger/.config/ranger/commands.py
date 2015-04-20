@@ -159,14 +159,6 @@ class tmux_detach(Command):
         os.system("tmux detach")
 
 
-if 'chdir_hook' in globals():
-    if os.environ.get('TERM').startswith('rxvt-unicode'):
-        @chdir_hook
-        def urxvt_cwd_spawn_hook(prev, new):
-            from sys import stdout
-            stdout.write("\033]777;cwd-spawn;path;{cwd}\007".format(cwd=new))
-            stdout.flush()
-
 class selfdebug(Command):
     def execute(self):
         import pdb
