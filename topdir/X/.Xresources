@@ -117,5 +117,6 @@ URxvt*keysym.M-o: perl:cwd-spawn
 
 
 rofi.terminal: urxvtcd
+rofi.modi: window,ssh,run
 
 !Xcursor.theme: whiteglass
