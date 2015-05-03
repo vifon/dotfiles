@@ -173,6 +173,11 @@
 "xcalib -invert -alter"
     Mod4 + Shift + BackSpace
 
+"compton-trans -c -o -20"
+    Mod4 + Control + minus
+"compton-trans -c -o +20"
+    Mod4 + Control + equal
+
 "redshift -O 3700"
     Mod4 + Shift + Right
 "redshift -O 4500"
