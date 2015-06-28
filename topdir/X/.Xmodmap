@@ -1,7 +1,3 @@
-! That weird ISO keyboard key as Shift
-keycode 94  = Shift_L
-add shift = Shift_L
-
 ! Disabled due to the KVM issues
 !! ScrollLock as CapsLock (because CapsLock is Ctrl)
 !keycode 78  = Caps_Lock

@@ -4,14 +4,14 @@
 feh --bg-tile ~/images/wallpapers/wall.png
 xsetroot -cursor_name left_ptr
 
-xrandr --output LVDS1 --primary
+xrandr --output eDP1 --primary
+xbacklight -set 20
 
 xrdb ~/.Xresources
 
 eval `ssh-agent`
 eval `gpg-agent --daemon`
 nm-applet &> /dev/null &
-traycalendar &> /dev/null &
 
 if [ -z "$SESSION" ]; then
     SESSION=i3
@@ -22,7 +22,9 @@ case $SESSION in
     awesome)
         wmname LG3D; exec awesome ;;
     i3)
-        exec $HOME/local/bin/i3 || exec i3 ;;
+        exec $HOME/local/bin/i3
+        exec i3
+        ;;
     kde)
         exec startkde ;;
     xmonad)

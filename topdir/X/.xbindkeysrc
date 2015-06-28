@@ -11,8 +11,20 @@
     Mod4 + e
 "emacs"
     Mod4 + Control + e
-"emacsclient -c --eval '(mu4e)'"
+"thunderbird"
     Mod4 + F9
+
+"zsh -c 'if (( $(xbacklight -get) < 9 )); then xbacklight -set 10; else xbacklight -inc 10; fi'"
+    XF86MonBrightnessUp
+
+"zsh -c 'if (( $(xbacklight -get) > 10 )); then xbacklight -dec 10; else xbacklight -set 1; fi'"
+    XF86MonBrightnessDown
+
+"xbacklight -set 100"
+    Mod4 + XF86MonBrightnessUp
+
+"xbacklight -set 1"
+    Mod4 + XF86MonBrightnessDown
 
 "rox"
     Mod4 + Control + grave
@@ -38,13 +50,18 @@
     Mod4 + Shift + m
 "urxvtcd -g 80x26 -e youtube-run"
     Mod4 + Control + m
-"amixer set Master toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
+# "amixer set Master toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
+"amixer -D pulse set Master Playback Switch toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
     XF86AudioMute
 "amixer set Speaker toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
     Mod1 + XF86AudioMute
-"mpcauth -q volume -5 || amixer set Master 5%- && killall -USR1 i3status"
+"amixer set Capture toggle"
+    XF86AudioMicMute
+# "mpcauth -q volume -5 || amixer set Master 5%- && killall -USR1 i3status"
+"amixer -D pulse set Master 5%- && killall -USR1 i3status"
     XF86AudioLowerVolume
-"mpcauth -q volume +5 || amixer set Master 5%+ && killall -USR1 i3status"
+# "mpcauth -q volume +5 || amixer set Master 5%+ && killall -USR1 i3status"
+"amixer -D pulse set Master 5%+ && killall -USR1 i3status"
     XF86AudioRaiseVolume
 "mpcauth -q  prev"
     Mod4 + Control + comma
@@ -84,7 +101,8 @@
     Mod4 + F10
 "urxvtcd -title 'IRC [mosh]' -e wbd --mosh"
     Mod4 + Control + F10
-"urxvtcd -title IRC -e wbd"
+
+"urxvtcd -e sh -c '/usr/bin/locate '\'\'' | fzf | tr -d \\n | xsel -i'"
     XF86Search
 
 "dmenu_launcher"
