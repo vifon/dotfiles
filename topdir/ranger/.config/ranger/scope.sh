@@ -67,6 +67,9 @@ case "$extension" in
         try lynx   -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         try elinks -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
         ;; # fall back to highlight/cat if the text browsers fail
+    # GraphViz Graphs (may be slow!):
+    dot)
+        dot -Tpng "$path" > "$cached" && exit 6 || exit 1;;
 esac
 
 case "$mimetype" in

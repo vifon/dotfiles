@@ -158,6 +158,31 @@ class tmux_detach(Command):
             return
         os.system("tmux detach")
 
+class copy_content(Command):
+    """
+    :copy_content
+
+    Copies to clipboard either a file's contents or the directory tree (as an ascii-art).
+    """
+    def execute(self):
+        import subprocess
+        import os
+        path = self.fm.thisfile.path
+        if self.fm.thisfile.is_directory:
+            tree = subprocess.Popen(["tree", "--", path], stdout=subprocess.PIPE)
+            xclip = subprocess.Popen(["xclip"], stdin=tree.stdout)
+            xclip.communicate()
+        else:
+            with open(path, 'r') as f:
+                xclip = subprocess.Popen(["xclip"], stdin=f)
+                xclip.communicate()
+
+@register_linemode
+class TreeLinemode(LinemodeBase):
+    name = "tree"
+
+    def filetitle(self, file, metadata):
+        return "  " * file.relative_path.count("/", 0) + file.basename
 
 class selfdebug(Command):
     def execute(self):
