@@ -132,6 +132,10 @@
     Mod4 + Control + i
 "i3lock-blur"
     XF86ScreenSaver
+"i3lock-blur"
+    Control + Shift + Mod4 + l
+"i3lock-blur"
+    Mod5 + Shift + Mod4 + l
 "i3lock-blur -d"
     Control + XF86ScreenSaver
 
