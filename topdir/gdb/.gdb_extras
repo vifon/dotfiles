@@ -1,0 +1,216 @@
+define asm
+  x /6i $pc
+end
+
+# z neta:
+define reg
+  printf "   rax:%12lX rbx:%12lX  rcx:%12lX ",  $rax, $rbx, $rcx
+  printf " rdx:%12lX\n",  $rdx
+  printf "   rsi:%12lX rdi:%12lX  rsp:%12lX ",  $rsi, $rdi, $rsp
+  printf " rbp:%12lX\n", $rbp
+  printf "    r8:%12lX  r9:%12lX  r10:%12lX  r11:%12lX \n", $r8, $r9, $r10, $r11
+  printf "   r12:%12lX r13:%12lX  r14:%12lX  r15:%12lX \n", $r12, $r13, $r14, $r15
+  # printf " ebp:%08X\n", $ebp
+  printf "   cs:%04X  ds:%04X  es:%04X", $cs, $ds, $es
+  printf "  fs:%04X  gs:%04X  ss:%04X\n", $fs, $gs, $ss
+  printf "   eflags:%08X  rip:%08X      ", $eflags, $rip
+  flags
+end
+document reg
+    Print CPU registers
+end
+
+define flags
+  if (($eflags >> 0xB) & 1 )
+    printf "O "
+  else
+    printf "o "
+  end
+  if (($eflags >> 0xA) & 1 )
+    printf "D "
+  else
+    printf "d "
+  end
+  if (($eflags >> 9) & 1 )
+    printf "I "
+  else
+    printf "i "
+  end
+  if (($eflags >> 8) & 1 )
+    printf "T "
+  else
+    printf "t "
+  end
+  if (($eflags >> 7) & 1 )
+    printf "S "
+  else
+    printf "s "
+  end
+  if (($eflags >> 6) & 1 )
+    printf "Z "
+  else
+    printf "z "
+  end
+  if (($eflags >> 4) & 1 )
+    printf "A "
+  else
+    printf "a "
+  end
+  if (($eflags >> 2) & 1 )
+    printf "P "
+  else
+    printf "p "
+  end
+  if ($eflags & 1)
+    printf "C "
+  else
+    printf "c "
+  end
+  printf "\n"
+end
+document flags
+Print flags register
+end
+
+define eflags
+  printf "     OF <%d>  DF <%d>  IF <%d>  TF <%d>",\
+  (($eflags >> 0xB) & 1 ), (($eflags >> 0xA) & 1 ), \
+  (($eflags >> 9) & 1 ), (($eflags >> 8) & 1 )
+  printf "  SF <%d>  ZF <%d>  AF <%d>  PF <%d>  CF <%d>\n",\
+  (($eflags >> 7) & 1 ), (($eflags >> 6) & 1 ),\
+  (($eflags >> 4) & 1 ), (($eflags >> 2) & 1 ), ($eflags & 1)
+  printf "     ID <%d>  VIP <%d> VIF <%d> AC <%d>",\
+  (($eflags >> 0x15) & 1 ), (($eflags >> 0x14) & 1 ), \
+  (($eflags >> 0x13) & 1 ), (($eflags >> 0x12) & 1 )
+  printf "  VM <%d>  RF <%d>  NT <%d>  IOPL <%d>\n",\
+  (($eflags >> 0x11) & 1 ), (($eflags >> 0x10) & 1 ),\
+  (($eflags >> 0xE) & 1 ), (($eflags >> 0xC) & 3 )
+end
+document eflags
+Print entire eflags register
+end
+
+define ascii_char
+  set $_c=*(unsigned char *)($arg0)
+  if ( $_c < 0x20 || $_c > 0x7E )
+    printf "."
+  else
+    printf "%c", $_c
+  end
+end
+document ascii_char
+Print the ASCII value of arg0 or '.' if value is unprintable
+end
+
+define hex_quad
+  printf "%02X %02X %02X %02X  %02X %02X %02X %02X",                          \
+  *(unsigned char*)($arg0), *(unsigned char*)($arg0 + 1),      \
+  *(unsigned char*)($arg0 + 2), *(unsigned char*)($arg0 + 3),  \
+  *(unsigned char*)($arg0 + 4), *(unsigned char*)($arg0 + 5),  \
+  *(unsigned char*)($arg0 + 6), *(unsigned char*)($arg0 + 7)
+end
+document hex_quad
+Print eight hexadecimal bytes starting at arg0
+end
+
+define hexdump
+  printf "%12lX : ", $arg0
+  hex_quad $arg0
+  printf " - "
+  hex_quad ($arg0+8)
+  printf " "
+
+  ascii_char ($arg0)
+  ascii_char ($arg0+1)
+  ascii_char ($arg0+2)
+  ascii_char ($arg0+3)
+  ascii_char ($arg0+4)
+  ascii_char ($arg0+5)
+  ascii_char ($arg0+6)
+  ascii_char ($arg0+7)
+  ascii_char ($arg0+8)
+  ascii_char ($arg0+9)
+  ascii_char ($arg0+0xA)
+  ascii_char ($arg0+0xB)
+  ascii_char ($arg0+0xC)
+  ascii_char ($arg0+0xD)
+  ascii_char ($arg0+0xE)
+  ascii_char ($arg0+0xF)
+
+  printf "\n"
+end
+document hexdump
+Display a 16-byte hex/ASCII dump of arg0
+end
+
+define ddump
+  printf "[%04X:%12lX]------------------------", $ds, $data_addr
+  printf "---------------------------------[ data]\n"
+  set $_count=0
+  while ( $_count < $arg0 )
+    set $_i=($_count*0x10)
+    hexdump ($data_addr+$_i)
+    set $_count++
+  end
+end
+document ddump
+Display $arg0 lines of hexdump for address $data_addr
+end
+
+define dd
+  if ( ($arg0 & 0x40000000) || ($arg0 & 0x08000000) || ($arg0 & 0xBF000000) )
+    set $data_addr=$arg0
+    ddump 0x10
+  else
+    printf "Invalid address: %12lX\n", $arg0
+  end
+end
+document dd
+Display 16 lines of a hex dump for $arg0
+end
+
+define datawin
+  if ( ($rsi & 0x40000000) || ($rsi & 0x08000000) || ($rsi & 0xBF000000) )
+    set $data_addr=$rsi
+  else
+    if ( ($rdi & 0x40000000) || ($rdi & 0x08000000) || ($rdi & 0xBF000000) )
+      set $data_addr=$rdi
+    else
+      if ( ($rax & 0x40000000) || ($rax & 0x08000000) || \
+        ($rax & 0xBF000000) )
+        set $data_addr=$rax
+      else
+        set $data_addr=$rsp
+      end
+    end
+  end
+  ddump 2
+end
+document datawin
+Display esi, edi, eax, or esp in the data window
+end
+
+define stack
+  printf "-------------------------------------------"
+  printf "-----------------------------[registers]\n"
+  reg
+  printf "[%04X:%12lX]------------------------", $ss, $rsp
+  printf "---------------------------------[stack]\n"
+  hexdump $rsp+0x40
+  hexdump $rsp+0x30
+  hexdump $rsp+0x20
+  hexdump $rsp+0x10
+  hexdump $rsp
+  datawin
+  printf "[%04X:%12lX]------------------------", $cs, $rip
+  printf "---------------------------------[ code]\n"
+  x /6i $pc
+  printf "---------------------------------------"
+  printf "---------------------------------------\n"
+end
+document stack
+Print regs, stack, ds:esi, and disassemble cs:eip
+end
+
+
+source /usr/share/gdb/gdb-stl-views/gdb-stl-views.gdb
