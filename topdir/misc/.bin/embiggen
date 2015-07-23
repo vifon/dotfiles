@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if test "x$1" = x-d; then
+    echo -e "\033]710;xft:terminus:pixelsize=12:antialias=false\033\\"
+else
+    echo -e "\033]710;xft:terminus:pixelsize=24:antialias=false\033\\"
+fi
