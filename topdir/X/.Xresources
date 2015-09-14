@@ -75,7 +75,7 @@ urxvt*color15: #eeeeec
 urxvt.font: xft:terminus:pixelsize=12:antialias=false
 !URxvt*font: xft:DejaVu Sans Mono:style=Book:size=10.5:antialias=true:hinting=true
 URxvt.imLocale: en_US.utf8
-!URxvt.iso14755_52: false
+URxvt.iso14755_52: false
 !URxvt.iso14755: false
 
 urxvt.scrollBar: false
