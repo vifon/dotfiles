@@ -127,6 +127,8 @@
     Mod4 + Print
 "scrot -s"
     Control + Print
+"sleep 0.5 && scrot -s --exec 'mtpaint $f; rm -f $f'"
+    Mod5 + Print
 
 "eject /dev/sr0"
     XF86Eject
