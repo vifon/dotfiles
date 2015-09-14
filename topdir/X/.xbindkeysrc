@@ -145,13 +145,6 @@
 "doublemouse"
     Mod4 + minus
 
-"xrandr --output eDP1 --auto --primary --output DP1-2 --off"
-    Mod4 + Control + Home
-"xrandr --output eDP1 --off --output DP1-2 --auto --primary"
-    Mod4 + Control + End
-"xrandr --output eDP1 --auto --primary --output DP1-2 --auto --right-of eDP1"
-    Mod4 + Control + Delete
-
 "~/.startup 1"
     Mod4 + Insert
 
@@ -189,14 +182,6 @@
 
 "xbacklight2 save 100"
     Mod4 + Shift + XF86Forward
-
-
-# "xcalib -invert -alter"
-#     m:0x1 + c:62
-# "xcalib -invert -alter"
-#     m:0x1 + c:50
-"xcalib -invert -alter"
-    Mod4 + Shift + BackSpace
 
 "compton-trans -c -o -20"
     Mod4 + Control + minus
