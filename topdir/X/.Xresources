@@ -115,6 +115,7 @@ URxvt.keysym.M-apostrophe: perl:aAtt:complete
 
 URxvt*keysym.M-o: perl:cwd-spawn
 
+URxvt.selection.pattern-0: : ?([^:]*)
 
 rofi.terminal: urxvtcd
 rofi.modi: window,ssh,run
