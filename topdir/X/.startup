@@ -36,8 +36,6 @@ else
     mpd 2> /dev/null &
     emacs --daemon &> /dev/null &
 
-    input-hooks.sh &
-
     redshift -o
     sleep 5
     setxkbmap $KEYBOARD_LANG -option ctrl:nocaps
