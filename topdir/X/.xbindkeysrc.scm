@@ -67,6 +67,8 @@
 
 (bindkeys "urxvtcd -g 150x32 -e ncmpcpp-run"
           '(mod4 m))
+(bindkeys "echo 'D`A1\nq' | ncmpcpp-run && sleep 0.1 && mpcauth -q play"
+          '(mod4 shift m))
 (bindkeys "amixer -D pulse set Master Playback Switch toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
           'XF86AudioMute)
 (bindkeys "amixer set Speaker toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
