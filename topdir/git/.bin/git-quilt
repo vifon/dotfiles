@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+quilt new "$1"
+
+git stash
+git stash show -v | quilt fold
+git stash drop
