@@ -1,2 +1,4 @@
+include ".local/share/themes/Vertex-Dark/gtk-2.0/gtkrc"
+
 gtk-theme-name = "Vertex-Dark"
 gtk-can-change-accels = 1
