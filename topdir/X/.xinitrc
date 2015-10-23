@@ -12,6 +12,7 @@ xrdb ~/.Xresources
 eval `ssh-agent`
 eval `gpg-agent --daemon`
 nm-applet &> /dev/null &
+blueman-applet &> /dev/null &
 
 if [ -z "$SESSION" ]; then
     SESSION=i3
