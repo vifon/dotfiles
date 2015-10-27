@@ -1,0 +1,155 @@
+#!/bin/zsh
+
+# dpaste --- A simple dpaste.com script
+
+# Copyright (C) 2015 Wojciech Siewierski <wojciech dot siewierski at onet dot pl>
+
+# Author: Wojciech Siewierski <wojciech dot siewierski at onet dot pl>
+
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 3
+# of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+ALLOWED_SYNTAX_LIST=(
+    coffee-script
+    text
+    tcl
+    genshi
+    csharp
+    go
+    trac-wiki
+    lasso
+    xml
+    console
+    sourceslist
+    fortran
+    matlab
+    factor
+    erlang
+    python
+    dart
+    nginx
+    python3
+    bat
+    lighty
+    myghty
+    d
+    shell-session
+    perl6
+    js+erb
+    fsharp
+    cfm
+    apacheconf
+    tex
+    modula2
+    llvm
+    html+django
+    scala
+    applescript
+    lua
+    rb
+    irc
+    xslt
+    js
+    swift
+    bash
+    c
+    vb.net
+    ocaml
+    awk
+    clojure
+    Clipper
+    ragel
+    smarty
+    haskell
+    puppet
+    apl
+    diff
+    js+django
+    rbcon
+    pycon
+    java
+    yaml
+    perl
+    json
+    common-lisp
+    groff
+    rhtml
+    html+php
+    js+php
+    ada
+    rst
+    groovy
+    scheme
+    bbcode
+    as
+    dtd
+    erb
+    powershell
+    rust
+    prolog
+    postscript
+    objective-c
+    cobol
+    ini
+    io
+    haml
+    smalltalk
+    mako
+    py3tb
+    make
+    mathematica
+    dpatch
+    html
+    css
+    pytb
+    eiffel
+    jsp
+    sql
+    php
+    scss
+    dylan
+    sparql
+    sass
+    django
+    cpp
+    delphi
+)
+
+SYNTAX=text
+EXPIRY_DAYS=7
+POSTER=$USER
+
+while getopts "s:e:u:" ARG; do
+    case "$ARG" in
+        s)
+            SYNTAX=$OPTARG
+            ;;
+        e)
+            EXPIRY_DAYS=$OPTARG
+            ;;
+        u)
+            POSTER=$OPTARG
+            ;;
+        ?)
+        ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if ! (( ${+ALLOWED_SYNTAX_LIST[(k)$SYNTAX]} )); then
+    echo "Unknown syntax: $SYNTAX"
+    exit 1
+fi
+
+curl -s -F "syntax=$SYNTAX" -F "expiry_days=$EXPIRY_DAYS" -F "poster=$POSTER" -F "content=<-" http://dpaste.com/api/v2/ | tee /dev/tty | xsel -i
