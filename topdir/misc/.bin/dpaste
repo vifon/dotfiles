@@ -152,4 +152,4 @@ if ! (( ${+ALLOWED_SYNTAX_LIST[(k)$SYNTAX]} )); then
     exit 1
 fi
 
-curl -s -F "syntax=$SYNTAX" -F "expiry_days=$EXPIRY_DAYS" -F "poster=$POSTER" -F "content=<-" http://dpaste.com/api/v2/ | tee /dev/tty | xsel -i
+curl -s -F "syntax=$SYNTAX" -F "expiry_days=$EXPIRY_DAYS" -F "poster=$POSTER" -F "content=<-" http://dpaste.com/api/v2/ | tee /dev/tty | tr -d '\n' | xsel -i
