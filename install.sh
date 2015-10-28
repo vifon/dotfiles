@@ -20,4 +20,4 @@ else
     PACKAGES=$argv
 fi
 
-stow $DRYRUN -v -t $HOME -d topdir ${=PACKAGES}
+stow $DRYRUN -v -t $HOME -d topdir --no-folding -S ${=PACKAGES}
