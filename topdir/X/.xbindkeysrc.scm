@@ -45,9 +45,6 @@
 (bindkeys "rox"
           '(mod4 control grave))
 
-(bindkeys "rofi -show window"
-          '(mod4 n))
-
 (bindkeys "kvm-switch"
           'Scroll_Lock)
 
