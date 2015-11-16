@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-quilt new "$1"
+git diff --quiet
 
 git stash
+quilt new "$1"
 git stash show -v | quilt fold
 git stash drop
