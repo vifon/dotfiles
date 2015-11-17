@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+FEATURE=$1
+PROJECT=`basename $PWD`
+git worktree add "../$PROJECT.d/$FEATURE" -b "$USER/$FEATURE" 1>&2
+echo "../$PROJECT.d/$FEATURE"
