@@ -1,6 +1,6 @@
 # graphical browser? defaults to yes for meatminds. text browser users can
 # work it out how to change it.
-SURFRAW_graphical=no
+SURFRAW_graphical=yes
 
 # name/path of text browser executable
 # e.g links, lynx, w3m
@@ -8,13 +8,13 @@ SURFRAW_text_browser=w3m
 
 # name/path of browser executable
 # e.g mozilla, netscape etc
-SURFRAW_graphical_browser=luakit
+SURFRAW_graphical_browser="chromium"
 
 # text browser arguments, or "none"
 SURFRAW_text_browser_args=none
 
 # graphical browser arguments, or "none"
-SURFRAW_graphical_browser_args=--nonblock
+SURFRAW_graphical_browser_args=none
 
 # use -remote openURL for graphical browser
 SURFRAW_graphical_remote=no
@@ -56,7 +56,7 @@ SURFRAW_dump=no
 
 # Language/country (for elvi that support it)
 # Should be a 2-letter iso country code
-SURFRAW_lang="en"
+SURFRAW_lang="pl"
 
 # provider for searches that use a search engine
 # with (eg) site: specifiers
