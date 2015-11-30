@@ -42,6 +42,11 @@
 (bindkeys "notify-send `xbacklight -get`"
           '(mod4 control XF86MonBrightnessUp))
 
+(bindkeys "compton-invert -Asr"
+          '(mod4 Prior))
+(bindkeys "compton-invert -Dsr"
+          '(mod4 Next))
+
 (bindkeys "rox"
           '(mod4 control grave))
 
