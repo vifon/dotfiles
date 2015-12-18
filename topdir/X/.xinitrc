@@ -17,7 +17,7 @@ blueman-applet &> /dev/null &
 rofi -key-window mod4+n -key-combi mod4+shift+n -combi-modi window,run -modi combi,window,ssh,run -terminal urxvtcd &
 
 if [ -z "$SESSION" ]; then
-    SESSION=i3
+    SESSION=xmonad
     ~/.startup &
 fi
 
@@ -31,6 +31,7 @@ case $SESSION in
     kde)
         exec startkde ;;
     xmonad)
+        stalonetray &
         exec zsh -c 'exec xmonad'
         ;;
     clfswm)
