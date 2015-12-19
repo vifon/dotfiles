@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-git diff --quiet
+! git diff --quiet
 
 git stash
 quilt new "$1"
