@@ -30,6 +30,8 @@
           '(mod4 control e))
 (bindkeys "thunderbird"
           '(mod4 F9))
+(bindkeys "telegram"
+          '(mod4 control F9))
 
 (bindkeys "zsh -c 'if (( $(xbacklight -get) < 9 )); then xbacklight -set 10; else xbacklight -inc 10; fi'"
           'XF86MonBrightnessUp)
