@@ -64,7 +64,7 @@
           'XF86Search)
 (bindkeys "eject /dev/sr0"
           'XF86Eject)
-(bindkeys "i3lock-blur"
+(bindkeys "i3lock -c 000000"
           'XF86ScreenSaver
           '(control shift mod4 l)
           '(mod5 shift mod4 l))
