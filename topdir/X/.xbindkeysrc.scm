@@ -55,7 +55,7 @@
 
 (bindkeys "chromium"
           '(mod4 shift o))
-(bindkeys "chromium $(xclip -o)"
+(bindkeys "chromium $(xsel -o)"
           '(mod4 mod1 o))
 
 (bindkeys "wxmaxima"
