@@ -77,7 +77,7 @@
           'XF86AudioMute)
 (bindkeys "amixer set Speaker toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
           '(mod1 XF86AudioMute))
-(bindkeys "amixer set Capture toggle"
+(bindkeys "amixer set Capture toggle | grep -o '\\[on\\]\\|\\[off\\]' | head -n1 | xargs notify-send"
           'XF86AudioMicMute)
 (bindkeys "amixer -D pulse set Master 5%- && killall -USR1 i3status"
           'XF86AudioLowerVolume)
