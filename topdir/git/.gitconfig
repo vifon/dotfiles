@@ -76,6 +76,7 @@
     f              = "!fun() { git forest --sha \"$@\" | less -RXFS; }; fun"
     ff             = merge --ff-only '@{u}'
     unmerged       = branch --no-merged
+    merged         = branch --merged
     undo           = checkout '@{1}'
     unfuck         = reset --hard '@{1}'
 
