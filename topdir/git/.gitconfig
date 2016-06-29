@@ -80,6 +80,8 @@
     undo           = checkout '@{1}'
     unfuck         = reset --hard '@{1}'
 
+    tar            = "!f(){ local NAME; NAME=$(basename $(git rev-parse --show-toplevel)); git archive --format=tar --prefix=$NAME/ HEAD | gzip > $NAME.tar.gz; echo \"Archive produced: $NAME.tar.gz\"; }; f"
+
     ribbon         = tag --force _ribbon origin/master
     catchup        = log --patch --reverse --topo-order _ribbon..origin/master
 [gui]
