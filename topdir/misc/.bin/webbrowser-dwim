@@ -19,9 +19,8 @@ esac
 # if [[ "$URL" =~ '\.(png|jpeg|jpg|gif)\b' ]]; then
 if [[ "$MIME" =~ 'image/' ]]; then
     exec webrun sxiv "$URL"
-# elif [[ "$URL" =~ '\.(pdf)\b' ]]; then
-elif [[ "$MIME" =~ 'video/' ]]; then
-    exec webrun mpv "$URL"
+# elif [[ "$MIME" =~ 'video/' ]]; then
+#     exec webrun mpv "$URL"
 elif [[ "$MIME" =~ 'application/pdf' ]]; then
     exec webrun evince "$URL"
 elif [[ "$MIME" =~ 'text/plain' ]]; then
