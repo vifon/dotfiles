@@ -10,6 +10,8 @@ Xft.hintstyle:  hintslight
 Xft.lcdfilter:  lcddefault
 
 
+Emacs.font: DejaVu Sans Mono-11
+
 !!! urxvt !!!
 
 urxvt*background:     black
