@@ -83,7 +83,7 @@ URxvt.keysym.M-C-slash:  perl:aAtt:fuzzy-word-complete
 URxvt.keysym.M-question: perl:aAtt:fuzzy-complete
 URxvt.keysym.M-quotedbl: perl:aAtt:undo
 URxvt.keysym.M-C-apostrophe: perl:aAtt:undo
-URxvt.keysym.M-apostrophe: perl:aAtt:complete
+URxvt.keysym.M-apostrophe: perl:aAtt:surround-complete
 
 URxvt*keysym.M-o: perl:cwd-spawn
 
