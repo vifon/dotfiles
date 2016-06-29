@@ -1,7 +1,7 @@
 # -*- shell-script -*-
 # vim: ft=sh :
 
-feh --bg-tile ~/images/wallpapers/wall.png
+feh --bg-scale ~/images/wallpapers/wall.png
 xsetroot -cursor_name left_ptr
 
 xrandr --output eDP1 --primary
