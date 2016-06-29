@@ -1,0 +1,9 @@
+directory: ~/music
+
+paths:
+  default: $albumartist/$year - $album%aunique{}/$track. $title ($artist)
+
+plugins: fetchart
+
+original_date: yes
+per_disc_numbering: yes
