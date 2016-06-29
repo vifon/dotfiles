@@ -66,13 +66,15 @@
           'XF86Search)
 (bindkeys "eject /dev/sr0"
           'XF86Eject)
-(bindkeys "i3lock -c 000000"
-          'XF86ScreenSaver
-          '(control shift mod4 l)
-          '(mod5 shift mod4 l))
-
-(bindkeys "urxvtcd -g 150x32 -e ncmpcpp-run"
-          '(mod4 shift m))
+(bindkeys "i3lock -c 222222 \
+           --dpms \
+           --inactivity-timeout 10 \
+           --ignore-empty-password \
+           --show-failed-attempts \
+           "
+          '(release XF86ScreenSaver)
+          '(release control shift mod4 l)
+          '(release mod5 shift mod4 l))
 (bindkeys "echo 'D`A1\nq' | ncmpcpp-run && sleep 0.1 && mpcauth -q play"
           '(mod4 shift mod5 m))
 (bindkeys "amixer -D pulse set Master Playback Switch toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
