@@ -1,5 +1,5 @@
-# Copyright (C) 2009-2013  Roman Zimbelmann <hut@lavabit.com>
-# This software is distributed under the terms of the GNU GPL version 3.
+# This file is part of ranger, the console file manager.
+# License: GNU GPL version 3, see the file "AUTHORS" for details.
 
 from ranger.gui.colorscheme import ColorScheme
 from ranger.gui.color import *
@@ -67,6 +67,9 @@ class Default(ColorScheme):
                 else:
                     fg = magenta
 
+            if context.inactive_pane:
+                fg = cyan
+
         elif context.in_titlebar:
             attr |= bold
             if context.hostname:
@@ -99,6 +102,9 @@ class Default(ColorScheme):
                 attr &= ~bold
             if context.vcscommit:
                 fg = yellow
+                attr &= ~bold
+            if context.vcsdate:
+                fg = cyan
                 attr &= ~bold
 
 
@@ -137,7 +143,7 @@ class Default(ColorScheme):
 
         elif context.vcsremote and not context.selected:
             attr &= ~bold
-            if context.vcssync:
+            if context.vcssync or context.vcsnone:
                 fg = green
             elif context.vcsbehind:
                 fg = red
