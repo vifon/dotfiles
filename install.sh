@@ -1,6 +1,14 @@
 #!/bin/zsh
 
-while getopts "ns" ARG; do
+preprocess_configs() {
+    local CONF_FILE
+    find -name '*.j2' | while IFS=$'\n' read CONF_FILE; do
+        ./preprocess.py "$@" $CONF_FILE ${CONF_FILE%.j2}
+    done
+}
+
+
+while getopts "nsc" ARG; do
     case "$ARG" in
         n)
             DRYRUN="-n"
@@ -8,21 +16,17 @@ while getopts "ns" ARG; do
         s)
             git submodule update --init
             ;;
+        c)
+            preprocess_configs --clean -v
+            exit
+            ;;
         ?)
             ;;
     esac
 done
 shift $[$OPTIND-1]
 
-
-preprocess_configs() {
-    local CONF_FILE
-    find -name '*.j2' | while IFS=$'\n' read CONF_FILE; do
-        ./preprocess.py $CONF_FILE > ${CONF_FILE%.j2}
-    done
-}
-
-preprocess_configs
+preprocess_configs -v
 
 
 if [ $# = 0 ]; then
