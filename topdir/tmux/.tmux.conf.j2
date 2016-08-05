@@ -12,11 +12,13 @@ set -g history-limit 4096
 
 set -g update-environment "DISPLAY WINDOWID SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION SSH_AGENT_VFN PATH"
 
+{% if tmux_version < (2,3) %}
 setw -g utf8 on
 set -g mode-mouse copy-mode
 set -g mouse-resize-pane on
 set -g mouse-select-pane on
 set -g mouse-select-window on
+{% endif %}
 setw -g mode-keys emacs
 #set-option -g mouse-select-pane on
 set -g bell-action any
