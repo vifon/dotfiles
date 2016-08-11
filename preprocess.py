@@ -42,7 +42,6 @@ def load_template(template_path):
     with open(template_path, 'r') as template_fh:
         return Template(
             template_fh.read(),
-            trim_blocks=True,
             keep_trailing_newline=True,
         )
 
