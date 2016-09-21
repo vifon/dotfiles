@@ -76,7 +76,7 @@ URxvt.url-select.launcher: webbrowser-dwim
 URxvt.url-select.autocopy: true
 URxvt.keysym.M-C-u: perl:url-select:select_next
 
-URxvt.keysym.M-C-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-S: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
 URxvt.keysym.M-C-slash:  perl:aAtt:fuzzy-word-complete
