@@ -67,6 +67,11 @@ urxvt.scrollBar: false
 urxvt.urgentOnBell: true
 Urxvt.secondaryScroll: false
 
+! Save more scrollback lines.
+URxvt.saveLines: 10240
+
+! TODO: Bind keys other than print screen which is bound elsewhere.
+URxvt.print-pipe: cat > $HOME/urxvt.dump.$(date +'$F_%H%m%S')
 
 URxvt.perl-ext-common: default,matcher,confirm-paste,url-select,keyboard-select,autocomplete-ALL-the-things,cwd-spawn
 URxvt.matcher.button: 3
