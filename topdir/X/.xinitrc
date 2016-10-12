@@ -10,7 +10,6 @@ xbacklight -set 20
 xrdb ~/.Xresources
 
 eval `ssh-agent`
-eval `gpg-agent --daemon`
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
 
