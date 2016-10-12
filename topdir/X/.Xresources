@@ -85,6 +85,7 @@ URxvt.keysym.M-S: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
 URxvt.keysym.M-C-slash:  perl:aAtt:fuzzy-word-complete
+URxvt.keysym.C-Tab:      perl:aAtt:fuzzy-word-complete
 URxvt.keysym.M-question: perl:aAtt:fuzzy-complete
 URxvt.keysym.M-quotedbl: perl:aAtt:undo
 URxvt.keysym.M-C-apostrophe: perl:aAtt:undo
