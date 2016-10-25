@@ -93,4 +93,8 @@ URxvt.keysym.M-apostrophe: perl:aAtt:surround-complete
 
 URxvt*keysym.M-o: perl:cwd-spawn
 
+! Match the git branch in zsh $RPS1
 URxvt.selection.pattern-0: : ?([^:]*)
+
+! Match the command line after the prompt. TODO: ignore the git branch.
+URxvt.selection.pattern-1: [λ$#] +(.*)
