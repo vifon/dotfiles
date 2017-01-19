@@ -1,7 +1,11 @@
 # -*- shell-script -*-
 # vim: ft=sh :
 
-feh --bg-scale ~/images/wallpapers/wall.png
+if [ -e "$HOME/.fehbg" ]; then
+    ~/.fehbg
+else
+    feh --bg-scale ~/images/wallpapers/wall.png
+fi
 xsetroot -cursor_name left_ptr
 
 xrandr --output eDP1 --primary
