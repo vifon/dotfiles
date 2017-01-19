@@ -8,7 +8,7 @@ else
 fi
 xsetroot -cursor_name left_ptr
 
-xrandr --output eDP1 --primary
+xrandr --output eDP1 --primary --auto
 xbacklight -set 20
 
 xrdb ~/.Xresources
