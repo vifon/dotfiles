@@ -139,8 +139,12 @@
           '(mod4 control equal))
 
 (bindkeys "redshift -O 3700"
-          '(mod4 shift Right))
-(bindkeys "redshift -O 4500"
-          '(mod4 shift Down))
+          '(mod4 mod1 shift Down)
+          '(mod4 mod1 shift Right))
 (bindkeys "redshift -x"
-          '(mod4 shift Left))
+          '(mod4 shift Left)
+          '(mod4 mod1 shift Left))
+(bindkeys "redshift -o"
+          '(mod4 shift Down))
+(bindkeys "redshift -O 4500"
+          '(mod4 shift Right))
