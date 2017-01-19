@@ -13,7 +13,7 @@ eval `ssh-agent`
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
 
-rofi -key-window mod4+shift+n -key-combi mod4+n -combi-modi window,run -modi combi,window,ssh,run -terminal urxvtcd &
+rofi -key-window SuperL+shift+n -key-combi SuperL+n -combi-modi window,run -modi combi,window,ssh,run -terminal urxvtcd &
 
 if [ -z "$SESSION" ]; then
     SESSION=xmonad
