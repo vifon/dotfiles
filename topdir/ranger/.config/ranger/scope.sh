@@ -68,9 +68,12 @@ if [ "$preview_images" = "True" ]; then
         #     dot -Tpng "$path" > "$cached" && exit 6 || exit 1;;
 
         # PDF documents:
-        pdf)
-            try pdftotext -l 10 -nopgbrk -q "$path" - && \
-                { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
+        # pdf)
+        #     try pdftotext -l 10 -nopgbrk -q "$path" - && \
+        #         { dump | trim | fmt -s -w $width; exit 0; } || exit 1
+        # ;;
+        application/pdf)
+            pdftoppm -f 1 -l 1 -scale-to-x 1680 -scale-to-y -1 -singlefile -jpeg -tiffcompression jpeg "$path" "${cached%.*}" && exit 6 || exit 1;;
     esac
 fi
 
