@@ -79,8 +79,9 @@
     ff             = merge --ff-only '@{u}'
     unmerged       = branch --no-merged
     merged         = branch --merged
-    undo           = checkout '@{1}'
+    undo           = checkout '@{-1}' # No longer necessary: "git checkout -"
     unfuck         = reset --hard '@{1}'
+    rape           = !git add -A && git commit --amend --no-edit && git push --force-with-lease
 
     tar            = "!f(){ local NAME; NAME=$(basename $(git rev-parse --show-toplevel)); git archive --format=tar --prefix=$NAME/ HEAD | gzip > $NAME.tar.gz; echo \"Archive produced: $NAME.tar.gz\"; }; f"
 
