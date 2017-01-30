@@ -1,0 +1,9 @@
+#!/usr/bin/perl -n
+
+BEGIN {
+    $sep1 = shift;
+    $sep2 = shift;
+}
+
+chomp;
+print $_, "\n" if $_ =~ /$sep1/ .. $_ =~ /$sep2/;
