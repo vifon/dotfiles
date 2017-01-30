@@ -97,4 +97,4 @@ URxvt*keysym.M-o: perl:cwd-spawn
 URxvt.selection.pattern-0: : ?([^:]*)
 
 ! Match the command line after the prompt. TODO: ignore the git branch.
-URxvt.selection.pattern-1: [λ$#] +(.*)
+URxvt.selection.pattern-1: [>λ$#] +(.*)
