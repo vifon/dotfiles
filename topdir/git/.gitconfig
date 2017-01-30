@@ -35,6 +35,8 @@
     tool = kdiff3
 
 
+[push]
+    default = simple
 [rebase]
     autosquash = true
 
@@ -94,5 +96,3 @@
     port = 30080
 [browser.luakit]
     cmd = luakit
-[push]
-    default = matching
