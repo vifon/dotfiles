@@ -57,8 +57,6 @@
 
 (bindkeys "chromium"
           '(mod4 shift o))
-(bindkeys "chromium $(xsel -o)"
-          '(mod4 mod1 o))
 
 (bindkeys "wxmaxima"
           'XF86Calculator)
