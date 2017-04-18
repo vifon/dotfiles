@@ -141,8 +141,9 @@ while getopts "s:e:u:" ARG; do
         u)
             POSTER=$OPTARG
             ;;
-        ?)
-        ;;
+        '?')
+            exit 1
+            ;;
     esac
 done
 shift $((OPTIND-1))
