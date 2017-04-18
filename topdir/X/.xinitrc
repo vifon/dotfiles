@@ -19,6 +19,7 @@ eval `ssh-agent`
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
 
+xautolock -time 10 -locker 'i3lock -c 222222 --dpms --inactivity-timeout 10 --ignore-empty-password --show-failed-attempts' -corners '00-+' -notify 5 -notifier 'xset dpms force off' &
 rofi -key-window SuperL+shift+n -key-combi SuperL+n -combi-modi window,run -modi combi,window,ssh,run -terminal urxvtcd &
 
 if [ -z "$SESSION" ]; then
