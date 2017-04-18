@@ -1,14 +1,16 @@
 # -*- shell-script -*-
 # vim: ft=sh :
 
+xsetroot -cursor_name left_ptr
+
+xrandr --output eDP1 --primary --auto --output DP1-2 --off
+
 if [ -e "$HOME/.fehbg" ]; then
     ~/.fehbg
 else
     feh --bg-scale ~/images/wallpapers/wall.png
 fi
-xsetroot -cursor_name left_ptr
 
-xrandr --output eDP1 --primary --auto --output DP1-2 --off
 xbacklight -set 20
 
 xrdb ~/.Xresources
