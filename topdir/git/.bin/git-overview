@@ -1,0 +1,28 @@
+#!/bin/bash
+
+help() {
+    cat <<EOF
+git-overview -- Show all the changes in the current branch, whether it was merged or not.
+
+Dependencies:
+  - git-merge-commit
+
+Usage:
+  $0 [<object> = HEAD]
+EOF
+}
+
+case "$1" in
+    --help|-h)
+        help
+        exit
+        ;;
+esac
+
+ref=${1:-HEAD}
+
+if merge_commit=$(git merge-commit "$ref" 2> /dev/null); then
+    git diff "$merge_commit~1...$ref"
+else
+    git diff "master...$ref"
+fi

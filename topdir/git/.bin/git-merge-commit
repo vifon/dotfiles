@@ -1,0 +1,40 @@
+#!/bin/bash
+
+help() {
+    cat <<EOF
+git-merge-commit -- Find a commit that merged the selected commit into master.
+
+Usage:
+  $0 [<object> = HEAD]
+EOF
+}
+
+case "$1" in
+    --help|-h)
+        help
+        exit
+        ;;
+esac
+
+ref=${1:-HEAD}
+
+topicsha=$(git rev-parse "$ref")
+mergebase=$(git merge-base master "$ref")
+
+if [[ $topicsha != $mergebase ]]; then
+    echo "'$ref' is not merged yet!" 1>&2
+    exit 1
+else
+    # It's already merged. Find merge in log.
+    # This prints sha parent1sha [ parent2sha ... ]
+    mergecommit=$(git log --format='%H %P' master |
+        awk -vtopicsha="$topicsha" '$3 == topicsha { print $1; exit }'
+    )
+
+    if [[ -n $mergecommit ]]; then
+        echo $mergecommit
+    else
+        echo "Something went terribly wrong..." 1>&2
+        exit 2
+    fi
+fi
