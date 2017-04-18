@@ -7,6 +7,7 @@
 
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import *
+from ranger.api import *
 
 import os.path
 
