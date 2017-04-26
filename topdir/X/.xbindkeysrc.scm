@@ -56,7 +56,7 @@
           'Scroll_Lock)
 
 (bindkeys "chromium"
-          '(mod4 shift o))
+          '(mod4 control shift o))
 
 (bindkeys "wxmaxima"
           'XF86Calculator)
