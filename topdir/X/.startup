@@ -31,7 +31,6 @@ if [ -n "$1" ]; then
 else
     run urxvtd -f -o
     pkill xbindkeys ; xbindkeys
-    killall autocutsel ; autocutsel -f && autocutsel -s PRIMARY -f
 
     mpd 2> /dev/null &
     emacs --daemon &> /dev/null &
