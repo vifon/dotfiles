@@ -1,3 +1,6 @@
 [submodule "submodules/git-fff"]
 	path = submodules/git-fff
 	url = https://github.com/xender/git-fff
+[submodule "submodules/flip"]
+	path = submodules/flip
+	url = https://github.com/Vifon/flip
