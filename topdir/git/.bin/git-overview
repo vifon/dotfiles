@@ -8,21 +8,31 @@ Dependencies:
   - git-merge-commit
 
 Usage:
-  $0 [<object> = HEAD]
+  $0 [<object> = HEAD] [ -- git-diff-flags ... ]
 EOF
 }
 
-case "$1" in
-    --help|-h)
-        help
-        exit
-        ;;
-esac
+ref=HEAD
 
-ref=${1:-HEAD}
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --help|-h)
+            help
+            exit
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            ref=$1
+            ;;
+    esac
+    shift
+done
 
 if merge_commit=$(git merge-commit "$ref" 2> /dev/null); then
-    git diff "$merge_commit~1...$ref"
+    git diff "$merge_commit~1...$ref" "$@"
 else
-    git diff "master...$ref"
+    git diff "master...$ref" "$@"
 fi
