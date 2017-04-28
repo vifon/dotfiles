@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+local i
+for (( i=1; i <= $#argv; ++i )); do
+    if [ -e "$argv[i]" ]; then
+        # Resolve the symlinks as git-diff doesn't do that. Don't do
+        # it for arguments that are not files to leave the
+        # -options/--options intact.
+        argv[$i]=$argv[$i]:A
+    fi
+done
+git diff --no-index $argv
