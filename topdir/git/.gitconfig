@@ -79,7 +79,6 @@
     ff             = merge --ff-only '@{u}'
     unmerged       = branch --no-merged
     merged         = branch --merged
-    undo           = checkout '@{-1}' # No longer necessary: "git checkout -"
     unfuck         = reset --hard '@{1}'
     rape           = !git add -A && git commit --amend --no-edit && git push --force-with-lease
 
