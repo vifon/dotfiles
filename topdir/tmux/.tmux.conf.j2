@@ -10,8 +10,6 @@ set -g set-titles on
 set -g set-titles-string '#T'
 set -g history-limit 4096
 
-set -g update-environment "DISPLAY WINDOWID SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION SSH_AGENT_VFN PATH"
-
 {% if tmux_version < (2,1) %}
 setw -g utf8 on
 set -g mode-mouse on
