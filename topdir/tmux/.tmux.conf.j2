@@ -10,15 +10,16 @@ set -g set-titles on
 set -g set-titles-string '#T'
 set -g history-limit 4096
 
-{% if tmux_version < (2,1) %}
+{% if tmux_version < (2,1) -%}
 setw -g utf8 on
 set -g mode-mouse on
 set -g mouse-resize-pane on
 set -g mouse-select-pane on
 set -g mouse-select-window on
-{% else %}
+{%- else -%}
 set -g mouse on
-{% endif %}
+{%- endif %}
+
 setw -g mode-keys emacs
 set -g bell-action any
 
@@ -35,19 +36,19 @@ bind z send-prefix          #
 unbind '"'
 unbind %
 
-{% if tmux_version < (1,9) %}
+{% if tmux_version < (1,9) -%}
 bind S split-window -v		# vertical split
 bind - split-window -v
 bind | split-window -h		# horizontal split
 bind '\' split-window -h		#' horizontal split
 bind C-c new-window			# new window
-{% else %}
+{%- else -%}
 bind S split-window -v -c '#{pane_current_path}'  # vertical split
 bind - split-window -v -c '#{pane_current_path}'
 bind | split-window -h -c '#{pane_current_path}'    # horizontal split
 bind '\' split-window -h -c '#{pane_current_path}'  # horizontal split
 bind C-c new-window -c '#{pane_current_path}'  # new window
-{% endif %}
+{%- endif %}
 
 bind-key C-z last-window    # last window
 #bind tab down-pane         # change split
