@@ -1,7 +1,5 @@
 ! vim: set fdm=marker :
 
-!!! Xft !!!
-
 Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
@@ -12,10 +10,16 @@ Xft.lcdfilter:  lcddefault
 
 Emacs.font: DejaVu Sans Mono-11
 
-!!! urxvt !!!
+dzen2.font: Bitstream Vera Sans Mono:bold:size=12
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!! urxvt !!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! URxvt.background-expr: rootalign keep {shade FOCUS ? -0.95 : -0.85, blur 2, root}
 urxvt*background:     black
 urxvt*foreground:     #eeeeee
+
 
 ! "Bold" color
 urxvt*colorBD:        #ffffff
