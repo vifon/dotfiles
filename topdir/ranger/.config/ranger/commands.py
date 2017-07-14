@@ -48,7 +48,7 @@ class edit(Command):
         else:
             self.fm.edit_file(filepath)
 
-    def tab(self):
+    def tab(self, tabnum):
         return self._tab_directory_content()
 
 
