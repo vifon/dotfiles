@@ -73,7 +73,7 @@
           '(release XF86ScreenSaver)
           '(release control shift mod4 l)
           '(release mod5 shift mod4 l))
-(bindkeys "echo 'D`A1\nq' | ncmpcpp-run && sleep 0.1 && mpcauth -q play"
+(bindkeys "echo 'D`A1\nq' | ncmpcpp-auth && sleep 0.1 && mpcauth -q play"
           '(mod4 shift mod5 m))
 (bindkeys "amixer -D pulse set Master Playback Switch toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
           'XF86AudioMute)
