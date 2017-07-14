@@ -85,16 +85,16 @@
           'XF86AudioLowerVolume)
 (bindkeys "amixer -D pulse set Master 5%+ && killall -USR1 i3status"
           'XF86AudioRaiseVolume)
-(bindkeys "mpcauth -q prev"
+(bindkeys "media-prev"
           '(mod4 control comma)
           'XF86AudioPrev)
-(bindkeys "mpcauth -q next"
+(bindkeys "media-next"
           '(mod4 control period)
           'XF86AudioNext)
-(bindkeys "mpcauth -q stop"
+(bindkeys "media-stop"
           '(mod4 control slash)
           'XF86AudioStop)
-(bindkeys "mpcauth -q toggle"
+(bindkeys "media-toggle"
           '(mod4 grave)
           '(mod4 slash)
           '(mod4 Escape)
