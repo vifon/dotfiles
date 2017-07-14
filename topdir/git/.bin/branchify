@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Usage: git checkout -b john/2048/`xsel | branchify`
+
+tr -d "#/\"'" | tr 'A-Z ' 'a-z_'
