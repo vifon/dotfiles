@@ -3,5 +3,5 @@
 if test "x$1" = x-d; then
     /bin/echo -e "\033]710;xft:terminus:pixelsize=12:antialias=false\033\\"
 else
-    /bin/echo -e "\033]710;xft:terminus:pixelsize=30:antialias=false\033\\"
+    /bin/echo -e "\033]710;xft:DejaVu Sans Mono:pixelsize=28:antialias=false\033\\"
 fi
