@@ -3,7 +3,7 @@
 FLAGFILE="/tmp/kvm-switch-marker"
 
 if [ -e $FLAGFILE ]; then
-    mpcauth pause > /dev/null 2>&1
+    media-ctl Pause pause > /dev/null 2>&1
 
     # blink the LED
     xset led 3
