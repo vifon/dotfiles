@@ -55,8 +55,8 @@
 (bindkeys "kvm-switch"
           'Scroll_Lock)
 
-(bindkeys "chromium"
-          '(mod4 control shift o))
+;; (bindkeys "firefox"
+;;           '(mod4 control shift o))
 
 (bindkeys "wxmaxima"
           'XF86Calculator)
