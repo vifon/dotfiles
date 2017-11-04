@@ -58,7 +58,7 @@
 ;; (bindkeys "firefox"
 ;;           '(mod4 control shift o))
 
-(bindkeys "wxmaxima"
+(bindkeys "/usr/bin/octave --force-gui -q"
           'XF86Calculator)
 (bindkeys "urxvtcd -e sh -c '/usr/bin/locate \"\" | fzf | tr -d \"\\n\" | xsel -i'"
           'XF86Search)
