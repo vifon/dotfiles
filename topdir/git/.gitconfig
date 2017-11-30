@@ -96,3 +96,5 @@
     port = 30080
 [browser.luakit]
     cmd = luakit
+[magit]
+	hideCampaign = true
