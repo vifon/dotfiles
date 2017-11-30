@@ -33,15 +33,15 @@
 (bindkeys "telegram"
           '(mod4 control F9))
 
-(bindkeys "zsh -c 'if (( $(xbacklight -get) < 9 )); then xbacklight -set 10; else xbacklight -inc 10; fi'"
+(bindkeys "zsh -c 'if (( $(light) < 9 )); then light -S 10; else light -A 10; fi'"
           'XF86MonBrightnessUp)
-(bindkeys "zsh -c 'if (( $(xbacklight -get) > 10 )); then xbacklight -dec 10; else xbacklight -set 1; fi'"
+(bindkeys "zsh -c 'if (( $(light) > 10 )); then light -U 10; else light -S 1; fi'"
           'XF86MonBrightnessDown)
-(bindkeys "xbacklight -set 100"
+(bindkeys "light -S 100"
           '(mod4 XF86MonBrightnessUp))
-(bindkeys "xbacklight -set 1"
+(bindkeys "light -S 1"
           '(mod4 XF86MonBrightnessDown))
-(bindkeys "notify-send `xbacklight -get`"
+(bindkeys "notify-send `light`"
           '(mod4 control XF86MonBrightnessUp))
 
 (bindkeys "compton-invert -Asr"
