@@ -4,4 +4,4 @@
 #   $ onclose service.log; vim service.log
 #   $ onclose file_that_is_being_downloaded.mp3.part; mplayer file_that_is_being_downloaded.mp3
 
-exec inotifywait -e close "$@"
+inotifywait -e close "$@" && sleep 0.1
