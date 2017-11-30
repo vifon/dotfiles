@@ -3,7 +3,7 @@
 
 xsetroot -cursor_name left_ptr
 
-xrandr --output eDP1 --primary --auto --output DP1-2 --off
+xrandr --output eDP-1 --primary --auto --output DP-1-2 --off
 
 if [ -e "$HOME/.fehbg" ]; then
     ~/.fehbg
