@@ -8,7 +8,7 @@ set -g status-right ' #[default]#[fg=green][ %H:%M, %d %b ]'
 set -g status-left '#[fg=blue][#S]'
 set -g set-titles on
 set -g set-titles-string '#T'
-set -g history-limit 4096
+set -g history-limit 50000
 
 {% if tmux_version < (2,1) -%}
 setw -g utf8 on
