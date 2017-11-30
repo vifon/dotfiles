@@ -5,9 +5,9 @@ FULLBROWSER="chromium --incognito"
 
 URL=$1
 RESPONSE=$(curl -s -I $URL)
-MIME=$(sed -n 's/^Content-Type: \([^;]*\).*/\1/p' <<< $RESPONSE)
+MIME=$(sed -n 's/^Content-Type: \([^;]*\).*/\1/ip' <<< $RESPONSE)
 
-CODE=$(sed -n 's/^HTTP\/[.0-9]\+ \([0-9]*\) .*/\1/p' <<< $RESPONSE)
+CODE=$(sed -n 's/^HTTP\/[.0-9]\+ \([0-9]*\) .*/\1/ip' <<< $RESPONSE)
 
 case $CODE in
     404)
