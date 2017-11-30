@@ -1,9 +1,10 @@
 #!/bin/zsh
 
-MINIBROWSER="chromium --incognito"
-FULLBROWSER="chromium --incognito"
+MINIBROWSER="webbroboard"
+FULLBROWSER="webbroboard"
 
 URL=$1
+$=MINIBROWSER "$URL"
 RESPONSE=$(curl -s -I $URL)
 MIME=$(sed -n 's/^Content-Type: \([^;]*\).*/\1/ip' <<< $RESPONSE)
 
@@ -11,23 +12,20 @@ CODE=$(sed -n 's/^HTTP\/[.0-9]\+ \([0-9]*\) .*/\1/ip' <<< $RESPONSE)
 
 case $CODE in
     404)
-        zenity --info --title Dispatcher --text 404
+        notify-send Dispatcher "404: Not Found"
         exit 1
         ;;
 esac
 
-# if [[ "$URL" =~ '\.(png|jpeg|jpg|gif)\b' ]]; then
 if [[ "$MIME" =~ 'image/' ]]; then
     exec webrun sxiv "$URL"
-# elif [[ "$MIME" =~ 'video/' ]]; then
-#     exec webrun mpv "$URL"
 elif [[ "$MIME" =~ 'application/pdf' ]]; then
     exec webrun evince "$URL"
 elif [[ "$MIME" =~ 'text/plain' ]]; then
     exec webrun e "$URL"
 else
     if [ "`ps -p $PPID -o comm=`" = "urxvtd" ]; then
-        exec $=MINIBROWSER "$URL"
+        # exec $=MINIBROWSER "$URL"
     else
         exec $=FULLBROWSER "$URL"
     fi
