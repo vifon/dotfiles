@@ -53,6 +53,10 @@ case $SESSION in
         emacs --daemon &
         exec zsh -c 'exec xmonad'
         ;;
+    emacs)
+        export START_EXWM=1
+        exec zsh -c 'exec emacs'
+        ;;
     clfswm)
         cd /home/vifon/src/clfswm/ ; exec ./clfswm ;;
     *)
