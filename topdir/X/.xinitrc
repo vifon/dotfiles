@@ -56,5 +56,5 @@ case $SESSION in
     clfswm)
         cd /home/vifon/src/clfswm/ ; exec ./clfswm ;;
     *)
-        exec $SESSION ;;
+        exec zsh -c "exec $SESSION" ;;
 esac
