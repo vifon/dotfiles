@@ -22,9 +22,21 @@ blueman-applet &> /dev/null &
 xautolock -time 10 -locker 'i3lock -c 222222 --dpms --inactivity-timeout 10 --ignore-empty-password --show-failed-attempts' -corners '00-+' -notify 5 -notifier 'xset dpms force off' &
 rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
 
+
+xbindkeys &
+setxkbmap pl -option ctrl:nocaps &
+xset r rate 300 30 &
+if xinput list | grep -q 'Logitech USB Trackball'; then
+    xset m 5 5
+else
+    xset m default
+fi
+
+mpd 2> /dev/null &
+
+
 if [ -z "$SESSION" ]; then
     SESSION=xmonad
-    ~/.startup &
 fi
 
 case $SESSION in
@@ -38,6 +50,7 @@ case $SESSION in
         exec startkde ;;
     xmonad)
         stalonetray &
+        emacs --daemon &
         exec zsh -c 'exec xmonad'
         ;;
     clfswm)
