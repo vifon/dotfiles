@@ -97,7 +97,6 @@
 (bindkeys "media-toggle"
           '(mod4 grave)
           '(mod4 slash)
-          '(mod4 Escape)
           'XF86AudioPlay)
 
 (bindkeys "urxvtcd -title IRC -e wbd"
