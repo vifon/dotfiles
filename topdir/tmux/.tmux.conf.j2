@@ -1,9 +1,9 @@
 # vim: set ft=conf :
-set-option -g status-bg black
-set-option -g status-fg white
-set-window-option -g window-status-current-bg magenta
-set-window-option -g window-status-current-attr bold
-set-option -g status-interval 15
+set -g status-bg black
+set -g status-fg white
+setw -g window-status-current-bg magenta
+setw -g window-status-current-attr bold
+set -g status-interval 15
 set -g status-right ' #[default]#[fg=green][ %H:%M, %d %b ]'
 set -g status-left '#[fg=blue][#S]'
 set -g set-titles on
@@ -25,46 +25,30 @@ set -g bell-action any
 
 setw -g aggressive-resize
 
-set -sg escape-time 0
+set -g escape-time 0
 
 set -g default-terminal screen-256color
 
-set -g prefix C-z           #
-unbind C-b                  # Screen prefix
-bind z send-prefix          #
-
-unbind '"'
-unbind %
+set -g prefix C-z
+unbind C-b
+bind z send-prefix
+bind C-z last-window
 
 {% if tmux_version < (1,9) -%}
-bind S split-window -v		# vertical split
+bind S split-window -v
 bind - split-window -v
-bind | split-window -h		# horizontal split
-bind '\' split-window -h		#' horizontal split
-bind C-c new-window			# new window
+bind | split-window -h
+bind C-c new-window
 {%- else -%}
-bind S split-window -v -c '#{pane_current_path}'  # vertical split
+bind S split-window -v -c '#{pane_current_path}'
 bind - split-window -v -c '#{pane_current_path}'
-bind | split-window -h -c '#{pane_current_path}'    # horizontal split
-bind '\' split-window -h -c '#{pane_current_path}'  # horizontal split
-bind C-c new-window -c '#{pane_current_path}'  # new window
+bind | split-window -h -c '#{pane_current_path}'
+bind C-c new-window -c '#{pane_current_path}'
 {%- endif %}
 
-bind-key C-z last-window    # last window
-#bind tab down-pane         # change split
-#bind C-tab down-pane       # change split
-bind -r tab select-pane -t :.+          # change split
-bind -r C-q select-pane -t :.+          # change split
-bind ` select-window -t :0  # alt. zero window
-bind = command-prompt "resize-pane -%%"
-bind h command-prompt "resize-pane -L '%%'"
-bind j command-prompt "resize-pane -D '%%'" 
-bind k command-prompt "resize-pane -U '%%'" 
-bind l command-prompt "resize-pane -R '%%'" 
-bind > command-prompt "link-window %%"
-bind \; command-prompt "move-window %%"
-bind < unlink-window
-#bind . command-prompt "move-window -s '%%'"
+bind -r tab select-pane -t :.+
+bind -r C-q select-pane -t :.+
+bind ` select-window -t :0
 bind m setw monitor-activity
 bind M command-prompt -p "(monitor-content)" "setw monitor-content %%"
 bind @ setw automatic-rename
@@ -73,11 +57,6 @@ bind A command-prompt "rename-session %%"
 bind L refresh-client
 bind K choose-session 'kill-session -t '%%''
 bind / command-prompt "join-pane -t %%; move-window -t 0"
+bind ! break-pane
 
 bind M-c new-session
-
-# Emacs-like window management
-bind 1 break-pane
-bind 2 split-window -v {% if tmux_version >= (1,9) %} -c '#{pane_current_path}' {% endif %}
-bind 3 split-window -h {% if tmux_version >= (1,9) %} -c '#{pane_current_path}' {% endif %}
-bind 0 kill-pane
