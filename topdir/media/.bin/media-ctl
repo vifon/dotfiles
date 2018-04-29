@@ -5,8 +5,8 @@ shift
 MPD_COMMAND=$1
 shift
 
-if pgrep spotify &> /dev/null; then
-    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player."$SPOTIFY_COMMAND"
-else
+# if pgrep spotify &> /dev/null; then
+#     dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player."$SPOTIFY_COMMAND"
+# else
     mpcauth -q "$MPD_COMMAND"
-fi
+# fi
