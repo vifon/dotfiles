@@ -30,6 +30,7 @@ def get_tmux_version():
         map(int,
             subprocess
             .check_output(["tmux", "-V"])
+            .decode()
             .partition(" ")[2]
             .strip()
             .split(".")))
