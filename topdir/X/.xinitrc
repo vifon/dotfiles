@@ -23,7 +23,7 @@ xautolock -time 10 -locker 'i3lock -c 222222 --dpms --inactivity-timeout 10 --ig
 rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
 
 
-xbindkeys &
+zsh -c 'exec xbindkeys' &
 setxkbmap pl -option ctrl:nocaps &
 xset r rate 300 30 &
 if xinput list | grep -q 'Logitech USB Trackball'; then
