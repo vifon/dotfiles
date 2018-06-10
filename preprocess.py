@@ -32,6 +32,7 @@ def get_tmux_version():
             .check_output(["tmux", "-V"])
             .decode()
             .partition(" ")[2]
+            .partition("-")[0]
             .strip()
             .split(".")))
 
