@@ -43,7 +43,6 @@
 [alias]
     unstage        = reset HEAD --
     visual         = !gitk --all
-    animate        = !gource
     cd             = checkout
     ls             = status --short
     a              = add
@@ -55,7 +54,6 @@
     com            = commit -m
     r              = rebase
     ri             = !GIT_EDITOR=vim git rebase -i
-    restore        = checkout -- \\*
     quicklog       = !git log --decorate --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset %C(bold blue)<%an>%Creset %Cgreen(%ar)%Creset %s' | head -n 30
     ql             = !git quicklog
     graph          = "!fun() { git log --graph --decorate --color --pretty=format:'%C(auto)%h%Creset %C(bold blue)<%<(10,trunc)%an>%Creset %Cgreen(%<(14,trunc)%ar)%Creset%C(auto)%d%Creset %s' \"$@\"; }; fun"
@@ -63,14 +61,10 @@
     g              = !git graph
     gg             = !git graph | most
     gf             = !git graph --first-parent
-    configure      = !vim ~/.gitconfig
     d              = diff
     ds             = diff --staged
     dw             = diff --color-words
     diffw          = diff --color-words
-    clean-rm       = !git ls-files --deleted | xargs -d \\\\n git rm
-    addremove      = !git clean-rm && git add -A
-    ar             = !git clean-rm && git add -A
     rerere-enable  = !touch .git/rr-cache
     forget         = rm --cached
     rescue         = !git rev-list -g --all | xargs git graph
