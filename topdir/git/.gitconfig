@@ -10,8 +10,8 @@
 [core]
     editor = emacsclient -c
     pager  = less
-	excludesfile = ~/.gitignore
-	quotepath = false
+    excludesfile = ~/.gitignore
+    quotepath = false
 [mergetool.emacs]
     cmd = emacsclient -c --eval \"(progn (flet ((yes-or-no-p (prompt) t)) (find-file \\\"$MERGED\\\")) (smerge-ediff))\"
     trustExitCode = false
@@ -97,4 +97,4 @@
 [browser.luakit]
     cmd = luakit
 [magit]
-	hideCampaign = true
+    hideCampaign = true
