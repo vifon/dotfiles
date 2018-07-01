@@ -28,10 +28,6 @@
           '(mod4 e))
 (bindkeys "emacs"
           '(mod4 control e))
-(bindkeys "thunderbird"
-          '(mod4 F9))
-(bindkeys "telegram"
-          '(mod4 control F9))
 
 (bindkeys "zsh -c 'if (( $(light) < 9 )); then light -S 10; else light -A 10; fi'"
           'XF86MonBrightnessUp)
