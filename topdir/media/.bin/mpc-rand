@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+set -eu
+
+IFS=$'\n'
+
+artists=(
+    $(mpc list albumartist)
+)
+
+idx=$(( $RANDOM % $#artists + 1))
+
+mpcauth -q clear
+mpcauth -q findadd albumartist $artists[$idx]
+mpcauth -q play
