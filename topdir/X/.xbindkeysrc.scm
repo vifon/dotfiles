@@ -21,7 +21,7 @@
     (for-each (lambda (key) (bind-func key command))
               keys)))
 
-(bindkeys "CLEARONSTART=1 urxvtcd"
+(bindkeys "CLEARONSTART=1 sh -c 'exec urxvtcd || exec urxvt'"
           '(mod4 space))
 
 (bindkeys "emacsclient -c"
