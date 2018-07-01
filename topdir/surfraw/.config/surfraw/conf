@@ -8,7 +8,7 @@ SURFRAW_text_browser=w3m
 
 # name/path of browser executable
 # e.g mozilla, netscape etc
-SURFRAW_graphical_browser="chromium"
+SURFRAW_graphical_browser="firefox -new-tab"
 
 # text browser arguments, or "none"
 SURFRAW_text_browser_args=none
