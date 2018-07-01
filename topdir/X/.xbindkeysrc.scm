@@ -135,6 +135,7 @@
           '(mod4 shift Left)
           '(mod4 mod1 shift Left))
 (bindkeys "redshift -o"
-          '(mod4 shift Down))
+          '(mod4 shift Down)
+          '(mod4 control space))
 (bindkeys "redshift -O 4500"
           '(mod4 shift Right))
