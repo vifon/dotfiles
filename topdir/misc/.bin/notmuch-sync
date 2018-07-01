@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -o errexit -o nounset -o pipefail
+
+notify-send Notmuch Syncing...
+gtk-tray-icon emblem-synchronizing &
+OUTPUT="`notmuch new "$@"`"
+notify-send Notmuch "$OUTPUT"
+kill "$!"
+if [ "$OUTPUT" != "No new mail." ]; then
+    gtk-tray-icon mail-unread &
+else
+    gtk-tray-icon mail-read &
+fi
+sleep 10
+kill "$!"

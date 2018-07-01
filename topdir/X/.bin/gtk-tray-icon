@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+import argparse
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('icon')
+    args = parser.parse_args()
+
+    def quit_on_click(*ignored):
+        Gtk.main_quit()
+    statusicon = Gtk.StatusIcon()
+    statusicon.set_from_icon_name(args.icon)
+    statusicon.connect('activate', quit_on_click)
+    statusicon.connect('popup-menu', quit_on_click)
+    Gtk.main()
+
+if __name__ == "__main__":
+    from sys import argv
+
+    # workaround for a pygobject bug
+    import signal
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+    main(argv)
