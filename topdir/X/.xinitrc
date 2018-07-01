@@ -19,7 +19,9 @@ eval `ssh-agent`
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
 
-xautolock -time 10 -locker 'i3lock -c 222222 --dpms --inactivity-timeout 10 --ignore-empty-password --show-failed-attempts' -corners '00-+' -notify 5 -notifier 'xset dpms force off' &
+xset dpms 590
+xsidle.sh zsh -c "exec slock" &
+
 rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
 
 
