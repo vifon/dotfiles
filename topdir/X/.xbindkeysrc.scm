@@ -64,12 +64,7 @@
           'XF86Search)
 (bindkeys "eject /dev/sr0"
           'XF86Eject)
-(bindkeys "i3lock -c 222222 \
-           --dpms \
-           --inactivity-timeout 10 \
-           --ignore-empty-password \
-           --show-failed-attempts \
-           "
+(bindkeys "slock"
           '(release XF86ScreenSaver)
           '(release control shift mod4 l)
           '(release shift mod4 l))
