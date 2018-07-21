@@ -4,11 +4,12 @@ set -o errexit -o nounset -o pipefail
 
 notify-send Notmuch Syncing...
 gtk-tray-icon emblem-synchronizing &
-OUTPUT="`notmuch new "$@"`"
+OUTPUT="`notmuch new`"
 notify-send Notmuch "$OUTPUT"
 kill "$!"
 if [ "$OUTPUT" != "No new mail." ]; then
     gtk-tray-icon mail-unread &
+    emacsclient --eval '(with-current-buffer "'"${1-*notmuch-hello*}"'" (notmuch-refresh-this-buffer))' || true
 else
     gtk-tray-icon mail-read &
 fi
