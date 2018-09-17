@@ -18,6 +18,7 @@ xrdb ~/.Xresources
 eval `ssh-agent`
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
+dunst &
 
 xset dpms 590
 xsidle.sh zsh -c "exec slock" &
