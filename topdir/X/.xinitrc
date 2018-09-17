@@ -11,7 +11,7 @@ else
     feh --bg-scale ~/images/wallpapers/wall.png
 fi
 
-xbacklight -set 20
+xbacklight -set 30
 
 xrdb ~/.Xresources
 
