@@ -86,7 +86,7 @@ URxvt.url-select.autocopy: true
 URxvt.keysym.M-C-u: perl:url-select:select_next
 
 URxvt.keysym.M-S: perl:keyboard-select:activate
-URxvt.keysym.M-s: perl:keyboard-select:search
+! URxvt.keysym.M-s: perl:keyboard-select:search
 
 URxvt.keysym.M-C-slash:  perl:aAtt:fuzzy-word-complete
 URxvt.keysym.C-Tab:      perl:aAtt:fuzzy-word-complete
