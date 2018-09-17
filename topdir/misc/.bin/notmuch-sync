@@ -9,9 +9,15 @@ notify-send Notmuch "$OUTPUT"
 kill "$!"
 if [ "$OUTPUT" != "No new mail." ]; then
     gtk-tray-icon mail-unread &
-    emacsclient --eval '(with-current-buffer "'"${1-*notmuch-hello*}"'" (notmuch-refresh-this-buffer))' || true
 else
     gtk-tray-icon mail-read &
 fi
-sleep 10
+emacsclient --eval "
+(dolist (buffer '(\"${1-*notmuch-hello*}\"
+                  \"*notmuch-saved-search-new*\"))
+  (ignore-errors
+    (with-current-buffer buffer
+      (notmuch-refresh-this-buffer))))
+" || true
+sleep 30
 kill "$!"
