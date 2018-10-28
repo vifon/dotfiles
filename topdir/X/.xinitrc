@@ -20,7 +20,7 @@ nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
 dunst &
 
-xset dpms 590
+xset dpms 590 600 600
 xsidle.sh zsh -c "exec slock" &
 
 rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
