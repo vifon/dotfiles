@@ -2,4 +2,4 @@
 
 # Usage: git checkout -b john/2048/`xsel | branchify`
 
-tr -d "#/\"'" | tr 'A-Z ' 'a-z_'
+tr -d "#\"'" | tr 'A-Z :/' 'a-z___' | sed 's/_\+/_/g'
