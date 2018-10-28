@@ -1,0 +1,9 @@
+#!/usr/bin/env runhaskell
+
+import System.Environment (getArgs)
+import System.Process
+
+main :: IO ()
+main = do
+  argv <- getArgs
+  callProcess "fd" $ ["-d", "1"] ++ (argv >>= \x -> ["-t", x])
