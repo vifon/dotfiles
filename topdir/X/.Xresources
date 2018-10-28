@@ -59,8 +59,9 @@ urxvt*color14: #00f5e9
 ! Bright white
 urxvt*color15: #eeeeec
 
-urxvt.font: xft:terminus:pixelsize=12:antialias=false
-!URxvt*font: xft:DejaVu Sans Mono:style=Book:size=10.5:antialias=true:hinting=true
+! urxvt.font: xft:terminus:pixelsize=12:antialias=false
+! URxvt*font: xft:DejaVu Sans Mono:style=Book:size=12:antialias=true:hinting=true
+URxvt*font: xft:Inconsolata:size=14,xft:DejaVu Sans Mono:style=Book:size=14
 URxvt.imLocale: en_US.utf8
 
 ! Disable ctrl+shift
