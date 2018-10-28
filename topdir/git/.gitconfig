@@ -24,7 +24,7 @@
     trustExitCode = false
     keepBackup = false
 [merge]
-    tool = kdiff3
+    tool = meld
 
 
 [difftool.p4merge]
@@ -32,7 +32,7 @@
 [difftool]
     prompt = false
 [diff]
-    tool = kdiff3
+    tool = meld
 
 
 [push]
