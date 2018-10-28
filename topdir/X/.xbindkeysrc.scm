@@ -24,10 +24,13 @@
 (bindkeys "CLEARONSTART=1 sh -c 'exec urxvtcd || exec urxvt'"
           '(mod4 space))
 
-(bindkeys "emacsclient -c"
-          '(mod4 e))
-(bindkeys "emacs"
-          '(mod4 control e))
+(unless (let ((session (getenv "SESSION")))
+          (and session
+               (string=? session "emacs")))
+  (bindkeys "emacsclient -c"
+            '(mod4 e))
+  (bindkeys "emacs"
+            '(mod4 control e)))
 
 (bindkeys "zsh -c 'if (( $(light) < 9 )); then light -S 10; else light -A 10; fi'"
           'XF86MonBrightnessUp)
