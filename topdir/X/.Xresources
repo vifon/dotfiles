@@ -71,6 +71,7 @@ URxvt.iso14755_52: false
 urxvt.scrollBar: false
 urxvt.urgentOnBell: true
 Urxvt.secondaryScroll: false
+URxvt.secondaryWheel: true
 
 ! Save more scrollback lines.
 URxvt.saveLines: 10240
