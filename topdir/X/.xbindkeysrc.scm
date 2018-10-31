@@ -21,12 +21,12 @@
     (for-each (lambda (key) (bind-func key command))
               keys)))
 
-(bindkeys "CLEARONSTART=1 sh -c 'exec urxvtcd || exec urxvt'"
-          '(mod4 space))
-
 (unless (let ((session (getenv "SESSION")))
           (and session
                (string=? session "emacs")))
+  (bindkeys "sh -c 'exec urxvtcd || exec urxvt'"
+            '(mod4 space))
+
   (bindkeys "emacsclient -c"
             '(mod4 e))
   (bindkeys "emacs"
