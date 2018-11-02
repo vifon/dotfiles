@@ -43,14 +43,6 @@ if [ -z "$SESSION" ]; then
 fi
 
 case $SESSION in
-    awesome)
-        wmname LG3D; exec awesome ;;
-    i3)
-        exec $HOME/local/bin/i3
-        exec i3
-        ;;
-    kde)
-        exec startkde ;;
     xmonad)
         stalonetray &
         emacs --daemon &
@@ -59,8 +51,6 @@ case $SESSION in
     emacs)
         exec env START_EXWM=1 zsh -c 'exec emacs'
         ;;
-    clfswm)
-        cd /home/vifon/src/clfswm/ ; exec ./clfswm ;;
     *)
         exec zsh -c "exec $SESSION" ;;
 esac
