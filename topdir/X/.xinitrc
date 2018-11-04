@@ -49,7 +49,7 @@ case $SESSION in
         exec zsh -c 'exec xmonad'
         ;;
     emacs)
-        exec env START_EXWM=1 zsh -c 'exec emacs'
+        exec zsh -c "exec emacs --eval \"(require 'my-exwm)\""
         ;;
     *)
         exec zsh -c "exec $SESSION" ;;
