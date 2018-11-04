@@ -1,6 +1,10 @@
 # -*- shell-script -*-
 # vim: ft=sh :
 
+if [ -z "$SESSION" ]; then
+    export SESSION=xmonad
+fi
+
 xsetroot -cursor_name left_ptr
 
 xrandr --output eDP-1 --primary --auto --output DP-1-2 --off
@@ -37,10 +41,6 @@ fi
 
 mpd 2> /dev/null &
 
-
-if [ -z "$SESSION" ]; then
-    SESSION=xmonad
-fi
 
 case $SESSION in
     xmonad)
