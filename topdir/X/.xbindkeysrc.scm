@@ -21,9 +21,13 @@
     (for-each (lambda (key) (bind-func key command))
               keys)))
 
-(unless (let ((session (getenv "SESSION")))
-          (and session
-               (string=? session "emacs")))
+(define (session? . allowed-sessions)
+  (let ((session (getenv "SESSION")))
+    (and session
+         (member session
+                 allowed-sessions))))
+
+(unless (session? "emacs")
   (bindkeys "sh -c 'exec urxvtcd || exec urxvt'"
             '(mod4 space))
 
@@ -54,8 +58,9 @@
 (bindkeys "kvm-switch"
           'Scroll_Lock)
 
-;; (bindkeys "firefox"
-;;           '(mod4 control shift o))
+(unless (session? "xmonad")
+  (bindkeys "firefox"
+            '(mod4 control shift o)))
 
 (bindkeys "/usr/bin/octave --force-gui -q"
           'XF86Calculator)
