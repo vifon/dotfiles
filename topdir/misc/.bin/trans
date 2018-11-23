@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd $HOME/src/translate-shell/
-$HOME/src/translate-shell/translate "$@"
