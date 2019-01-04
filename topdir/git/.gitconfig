@@ -8,7 +8,6 @@
     meta = yellow bold
     func = magenta bold
 [core]
-    editor = emacsclient -c
     pager  = less
     excludesfile = ~/.gitignore
     quotepath = false
