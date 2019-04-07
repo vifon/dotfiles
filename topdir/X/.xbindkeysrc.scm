@@ -59,19 +59,18 @@
           'Scroll_Lock)
 
 (unless (session? "xmonad")
-  (bindkeys "firefox"
-            '(mod4 control shift o)))
+  (bindkeys "firefox -P default"
+            '(mod4 control shift o))
+  (bindkeys "tabbed -n surf surf -e"
+            '(mod4 control shift mod5 o)))
 
-(bindkeys "/usr/bin/octave --force-gui -q"
-          'XF86Calculator)
-(bindkeys "urxvtcd -e sh -c '/usr/bin/locate \"\" | fzf | tr -d \"\\n\" | xsel -i'"
-          'XF86Search)
-(bindkeys "eject /dev/sr0"
-          'XF86Eject)
 (bindkeys "slock"
           '(release XF86ScreenSaver)
-          '(release control shift mod4 l)
-          '(release shift mod4 l))
+          '(release control shift mod4 l))
+(unless (session? "stumpwm")
+  (bindkeys "slock"
+            '(release shift mod4 l)))
+
 (bindkeys "mpc-rand"
           '(mod4 shift mod5 m))
 (bindkeys "amixer -D pulse set Master Playback Switch toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
