@@ -124,12 +124,8 @@
 (bindkeys "scrot -s --exec 'mtpaint $f; rm -f $f'"
           '(release mod5 Print))
 
-(bindkeys "~/.startup 1"
+(bindkeys "xset r rate 300 30"
           '(mod4 Insert))
-(bindkeys "~/.startup --reset-mouse"
-          '(mod4 control Insert))
-(bindkeys "~/.startup 1 && xmodmap -e 'remove control = Control_L' -e 'keycode 37 = Super_L' -e 'add control = Control_L' -e 'add mod4 = Super_L'"
-          '(mod1 control Insert))
 
 (bindkeys "compton-trans -c -o -20"
           '(mod4 control minus))
