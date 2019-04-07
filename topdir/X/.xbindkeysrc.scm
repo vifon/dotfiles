@@ -31,7 +31,7 @@
   (bindkeys "sh -c 'exec urxvtcd || exec urxvt'"
             '(mod4 space))
 
-  (bindkeys "emacsclient -c"
+  (bindkeys "emacsclient -c -a ''"
             '(mod4 e))
   (bindkeys "emacs"
             '(mod4 control e)))

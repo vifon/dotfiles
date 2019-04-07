@@ -3,5 +3,5 @@
 if [ "$SESSION" = emacs ]; then
     exec emacsclient -a "urxvtc -e vim" "$@"
 else
-    exec emacsclient -c -a "urxvtc -e vim" "$@"
+    exec emacsclient -c -a "" "$@"
 fi
