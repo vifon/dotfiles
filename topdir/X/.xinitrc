@@ -19,7 +19,7 @@ light -S 40
 
 xrdb ~/.Xresources
 
-if SSH_AGENT_PID=$(pidof -s ssh-agent); then
+if SSH_AGENT_PID=$(pgrep --uid $(whoami)  --exact ssh-agent | head -n1); then
     SSH_AUTH_SOCK=$(printf '%s' /tmp/ssh*/agent.$((SSH_AGENT_PID - 1)))
     export SSH_AGENT_PID
     export SSH_AUTH_SOCK
