@@ -76,8 +76,7 @@ URxvt.secondaryWheel: true
 ! Save more scrollback lines.
 URxvt.saveLines: 10240
 
-! Protip: If PrintScreen is already bound, may be triggered with Shift+PrintScreen.
-URxvt.print-pipe: cat > $HOME/urxvt.dump.$(date +'%F_%H%m%S')
+URxvt.print-pipe: cat > /dev/null
 
 URxvt.perl-ext-common: default,matcher,confirm-paste,url-select,keyboard-select,resize-font,autocomplete-ALL-the-things,cwd-spawn
 URxvt.matcher.button: 3
