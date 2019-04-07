@@ -1,5 +1,5 @@
+#!/bin/bash
 # -*- shell-script -*-
-# vim: ft=sh :
 
 if [ -z "$SESSION" ]; then
     export SESSION=xmonad
@@ -19,7 +19,13 @@ light -S 40
 
 xrdb ~/.Xresources
 
-eval `ssh-agent`
+if SSH_AGENT_PID=$(pidof -s ssh-agent); then
+    SSH_AUTH_SOCK=$(printf '%s' /tmp/ssh*/agent.$((SSH_AGENT_PID - 1)))
+    export SSH_AGENT_PID
+    export SSH_AUTH_SOCK
+else
+    eval $(ssh-agent)
+fi
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
 dunst &
