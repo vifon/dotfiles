@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+QUERY='tag:deleted and not path:/Trash/'
+
+usage() {
+    cat <<EOF
+Usage:
+  notmuch gc [-n|--dry-run]
+  notmuch gc [-f|--force]
+  notmuch gc [-h|--help]
+EOF
+}
+
+if [ $# -gt 0 ]; then
+    case $1 in
+        -n|--dry-run)
+            notmuch search -- ${=QUERY}
+            ;;
+        -f|--force)
+            notmuch search --output=files --format=text0 -- ${=QUERY} | xargs -0 rm -v
+            ;;
+        -h|--help)
+            usage
+            exit
+            ;;
+        *)
+            echo "Unknown argument: $1" 1>&2
+            exit 1
+    esac
+else
+    usage
+    exit 2
+fi
