@@ -1,6 +1,8 @@
 #!/bin/bash
 # -*- shell-script -*-
 
+set -o pipefail
+
 if [ -z "$SESSION" ]; then
     export SESSION=xmonad
 fi
