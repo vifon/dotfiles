@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Notmuch
+Exec=notmuch compose %u
+Icon=emacs-icon
+Type=Application
+Terminal=false
+MimeType=x-scheme-handler/mailto;
