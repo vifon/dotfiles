@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PIDFILE="/tmp/redshift-toggle-$UID.pid"
+
+action() {
+    redshift -P -o &> /dev/null
+}
+
+alt_action() {
+    redshift -x
+}
+
+. bash-toggle.sh
