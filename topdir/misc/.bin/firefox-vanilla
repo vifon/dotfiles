@@ -1,0 +1,9 @@
+#!/bin/bash
+
+finish() {
+    rm -rf "$TMP"
+    exit
+}; trap finish EXIT INT TERM
+TMP="$(mktemp -d -t firefox.XXXXXX --tmpdir=/tmp)"
+
+env HOME="$TMP" firefox -no-remote "$@"
