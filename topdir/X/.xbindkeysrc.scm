@@ -60,9 +60,7 @@
 
 (unless (session? "xmonad")
   (bindkeys "firefox -P default"
-            '(mod4 control shift o))
-  (bindkeys "tabbed -n surf surf -e"
-            '(mod4 control shift mod5 o)))
+            '(mod4 control shift o)))
 
 (bindkeys "slock"
           '(release XF86ScreenSaver)
