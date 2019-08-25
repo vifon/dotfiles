@@ -62,12 +62,13 @@
   (bindkeys "firefox -P default"
             '(mod4 control shift o)))
 
-(bindkeys "slock"
-          '(release XF86ScreenSaver)
-          '(release control shift mod4 l))
-(unless (session? "stumpwm")
-  (bindkeys "slock"
-            '(release shift mod4 l)))
+(let ((i3lock "i3lock -c 222222 -m --show-failed-attempts"))
+  (bindkeys i3lock
+            '(release XF86ScreenSaver)
+            '(release control shift mod4 l))
+  (unless (session? "stumpwm")
+    (bindkeys i3lock
+              '(release shift mod4 l))))
 
 (bindkeys "mpc-rand"
           '(mod4 shift mod5 m))
