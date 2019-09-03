@@ -7,46 +7,58 @@ if [ -z "$SESSION" ]; then
     export SESSION=xmonad
 fi
 
-xsetroot -cursor_name left_ptr
-
-xrandr --output eDP-1 --primary --auto --output DP-1-2 --off
-
-if [ -e "$HOME/.fehbg" ]; then
-    ~/.fehbg
-else
-    feh --bg-scale ~/images/wallpapers/wall.png
-fi
-
-light -S 40
-
 xrdb ~/.Xresources
 
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+screen-settings() {
+    xsetroot -cursor_name left_ptr
 
-nm-applet &> /dev/null &
-dunst &
-udiskie --no-automount --tray --file-manager=ee &
+    xrandr --output eDP-1 --primary --auto --output DP-1-2 --off
 
-xset dpms 590 600 600
-xsidle.sh zsh -c "exec i3lock -c 222222 --show-failed-attempts" &
+    if [ -e "$HOME/.fehbg" ]; then
+        ~/.fehbg
+    else
+        feh --bg-scale ~/images/wallpapers/wall.png
+    fi
 
-rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
+    light -S 40
+}
 
+credential-settings() {
+    export GPG_TTY="$(tty)"
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+}
 
-zsh -c 'exec xbindkeys' &
-setxkbmap pl -option ctrl:nocaps &
-xset r rate 300 30 &
-numlockx on
-if xinput list | grep -q 'Logitech USB Trackball'; then
-    xset m 5 5
-else
-    xset m default
-fi
+start-daemons() {
+    nm-applet &> /dev/null &
+    dunst &
+    udiskie --no-automount --tray --file-manager=ee &
+    mpd 2> /dev/null &
+}
 
-mpd 2> /dev/null &
+lockscreen-settings() {
+    xset dpms 590 600 600
+    xsidle.sh zsh -c "exec i3lock -c 222222 --show-failed-attempts" &
+}
 
+keyboard-settings() {
+    zsh -c 'exec xbindkeys' &
+    rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
+    setxkbmap pl -option ctrl:nocaps &
+    xset r rate 300 30 &
+    numlockx on
+    if xinput list | grep -q 'Logitech USB Trackball'; then
+        xset m 5 5
+    else
+        xset m default
+    fi
+}
+
+screen-settings
+credential-settings
+lockscreen-settings
+keyboard-settings
+start-daemons
 
 case $SESSION in
     xmonad)
