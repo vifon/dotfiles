@@ -26,7 +26,6 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
 nm-applet &> /dev/null &
-blueman-applet &> /dev/null &
 dunst &
 
 xset dpms 590 600 600
