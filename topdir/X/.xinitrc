@@ -30,7 +30,7 @@ dunst &
 udiskie --no-automount --tray --file-manager=ee &
 
 xset dpms 590 600 600
-xsidle.sh zsh -c "exec slock" &
+xsidle.sh zsh -c "exec i3lock -c 222222 --show-failed-attempts" &
 
 rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
 
