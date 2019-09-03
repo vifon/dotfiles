@@ -21,7 +21,9 @@ light -S 40
 
 xrdb ~/.Xresources
 
-. ssh-agent-start-or-attach.sh
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 
 nm-applet &> /dev/null &
 blueman-applet &> /dev/null &
