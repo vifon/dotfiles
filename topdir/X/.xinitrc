@@ -27,6 +27,7 @@ gpgconf --launch gpg-agent
 
 nm-applet &> /dev/null &
 dunst &
+udiskie --no-automount --tray --file-manager=ee &
 
 xset dpms 590 600 600
 xsidle.sh zsh -c "exec slock" &
