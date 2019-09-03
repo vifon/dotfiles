@@ -38,6 +38,7 @@ rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
 zsh -c 'exec xbindkeys' &
 setxkbmap pl -option ctrl:nocaps &
 xset r rate 300 30 &
+numlockx on
 if xinput list | grep -q 'Logitech USB Trackball'; then
     xset m 5 5
 else
