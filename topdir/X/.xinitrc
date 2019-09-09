@@ -23,10 +23,17 @@ screen-settings() {
     light -S 40
 }
 
-credential-settings() {
+# Enable manually on machines that are expected to use SSH keys stored
+# on smartcards.
+ssh-agent-settings-smartcard() {
     export GPG_TTY="$(tty)"
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
     gpgconf --launch gpg-agent
+}
+
+# Used by default on all the other machines.
+ssh-agent-settings() {
+    . ssh-agent-start-or-attach.sh
 }
 
 start-daemons() {
@@ -55,7 +62,7 @@ keyboard-settings() {
 }
 
 screen-settings
-credential-settings
+ssh-agent-settings
 lockscreen-settings
 keyboard-settings
 start-daemons
