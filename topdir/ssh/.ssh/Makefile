@@ -1,2 +1,2 @@
-config: config.d/*
+config: $(sort $(wildcard config.d/*))
 	cat $^ > $@
