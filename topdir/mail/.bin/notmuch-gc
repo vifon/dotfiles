@@ -1,33 +1,78 @@
-#!/bin/zsh
+#!/usr/bin/env python3
 
-QUERY='tag:deleted and not path:/Trash/'
+import argparse
+import os
+import subprocess
 
-usage() {
-    cat <<EOF
-Usage:
-  notmuch gc [-n|--dry-run]
-  notmuch gc [-f|--force]
-  notmuch gc [-h|--help]
-EOF
-}
 
-if [ $# -gt 0 ]; then
-    case $1 in
-        -n|--dry-run)
-            notmuch search -- ${=QUERY}
-            ;;
-        -f|--force)
-            notmuch search --output=files --format=text0 -- ${=QUERY} | xargs -0 rm -v
-            ;;
-        -h|--help)
-            usage
-            exit
-            ;;
-        *)
-            echo "Unknown argument: $1" 1>&2
-            exit 1
-    esac
-else
-    usage
-    exit 2
-fi
+TRASH_QUERY = 'tag:deleted and not path:/Trash/'.split()
+SPAM_QUERY  = 'tag:spam'.split()
+
+
+def remove_mail(query):
+    trash0 = subprocess.check_output(
+        [
+            "notmuch",
+            "search",
+            "--output=files",
+            "--format=text0",
+            "--",
+            *query,
+        ],
+        universal_newlines=True,
+    )
+    trash = filter(None, trash0.split("\0"))
+    for mail in trash:
+        print("Removing:", mail)
+        os.unlink(mail)
+
+
+def fake_remove_mail(query):
+    dry_trash = subprocess.check_output(
+        [
+            "notmuch",
+            "search",
+            "--",
+            *query,
+        ],
+        universal_newlines=True,
+    )
+    print(dry_trash, end="")
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument(
+        "-n", "--dry-run",
+        help=(
+            "Don't actually delete anything, "
+            "just print what would be deleted."
+        ),
+        action='store_true',
+    )
+    mode.add_argument(
+        "-f", "--force",
+        help="Do delete the matched emails.",
+        action='store_true',
+    )
+    parser.add_argument(
+        "-s", "--spam",
+        help="Operate on the spam folder instead of trash/deleted.",
+        action='store_true',
+    )
+    args = parser.parse_args()
+
+    query = SPAM_QUERY if args.spam else TRASH_QUERY
+
+    if args.force:
+        remove_mail(query)
+    elif args.dry_run:
+        fake_remove_mail(query)
+    else:
+        assert False
+
+
+if __name__ == '__main__':
+    from sys import argv
+    main(argv)
