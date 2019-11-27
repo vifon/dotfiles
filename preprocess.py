@@ -5,6 +5,7 @@ from __future__ import print_function
 import argparse
 from jinja2 import Template
 import os
+import string
 import subprocess
 import sys
 
@@ -34,6 +35,7 @@ def get_tmux_version():
             .partition(" ")[2]
             .partition("-")[0]
             .strip()
+            .rstrip(string.ascii_letters)
             .split(".")))
 
 
@@ -53,6 +55,7 @@ def render_template_to_file(template, output_path, facts, verbose=False):
 
     """
     if verbose:
+        print("Facts:", facts)
         print("Generating `{}'".format(output_path), file=sys.stderr)
     facts.update(os.environ)  # Make the env vars available in the templates.
     if output_path is None:
