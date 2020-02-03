@@ -61,9 +61,6 @@ bind m setw monitor-activity
 bind M command-prompt -p "(monitor-content)" "setw monitor-content %%"
 bind @ setw automatic-rename
 bind r source-file ~/.tmux.conf
-bind A command-prompt "rename-session %%"
-bind L refresh-client
-bind K choose-session 'kill-session -t '%%''
 bind / command-prompt "join-pane -t %%; move-window -t 0"
 bind ! break-pane
 
