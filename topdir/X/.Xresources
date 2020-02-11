@@ -73,6 +73,12 @@ urxvt.urgentOnBell: true
 Urxvt.secondaryScroll: false
 URxvt.secondaryWheel: true
 
+! When scrolling up the scrollback, new lines will not scroll back to
+! bottom but pressing a key will.
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+
 ! Save more scrollback lines.
 URxvt.saveLines: 10240
 
