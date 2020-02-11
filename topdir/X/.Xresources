@@ -17,60 +17,60 @@ dzen2.font: Bitstream Vera Sans Mono:bold:size=12
 !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ! URxvt.background-expr: rootalign keep {shade FOCUS ? -0.95 : -0.85, blur 2, root}
-urxvt*background:     black
-urxvt*foreground:     #eeeeee
+URxvt.background:     black
+URxvt.foreground:     #eeeeee
 
 
 ! "Bold" color
-urxvt*colorBD:        #ffffff
+URxvt.colorBD:        #ffffff
 ! The selection
-urxvt*highlightColor: #5555ff
+URxvt.highlightColor: #5555ff
 
 ! Black
-urxvt*color0:  #111111
+URxvt.color0:  #111111
 ! Red
-urxvt*color1:  #dc0000
+URxvt.color1:  #dc0000
 ! Green
-urxvt*color2:  #00cc00
+URxvt.color2:  #00cc00
 ! Yellow
-urxvt*color3:  #c4a000
+URxvt.color3:  #c4a000
 ! Blue
-urxvt*color4:  #4276b8
+URxvt.color4:  #4276b8
 ! Magenta
-urxvt*color5:  #95709b
+URxvt.color5:  #95709b
 ! Cyan
-urxvt*color6:  #0b939b
+URxvt.color6:  #0b939b
 ! White
-urxvt*color7:  #d3d7cf
+URxvt.color7:  #d3d7cf
 ! Bright black
-urxvt*color8:  #555753
+URxvt.color8:  #555753
 ! Bright red
-urxvt*color9:  #ef2929
+URxvt.color9:  #ef2929
 ! Bright green
-urxvt*color10: #00ff00
+URxvt.color10: #00ff00
 ! Bright yellow
-urxvt*color11: #fce94f
+URxvt.color11: #fce94f
 ! Bright blue
-urxvt*color12: #729fcf
+URxvt.color12: #729fcf
 ! Bright magenta
-urxvt*color13: #ad7fa8
+URxvt.color13: #ad7fa8
 ! Bright cyan
-urxvt*color14: #00f5e9
+URxvt.color14: #00f5e9
 ! Bright white
-urxvt*color15: #eeeeec
+URxvt.color15: #eeeeec
 
 ! urxvt.font: xft:terminus:pixelsize=12:antialias=false
 ! URxvt*font: xft:DejaVu Sans Mono:style=Book:size=12:antialias=true:hinting=true
-URxvt*font: xft:Inconsolata:size=14,xft:DejaVu Sans Mono:style=Book:size=14
+URxvt.font: xft:Inconsolata:size=14,xft:DejaVu Sans Mono:style=Book:size=14
 URxvt.imLocale: en_US.utf8
 
 ! Disable ctrl+shift
 URxvt.iso14755_52: false
 !URxvt.iso14755: false
 
-urxvt.scrollBar: false
-urxvt.urgentOnBell: true
-Urxvt.secondaryScroll: false
+URxvt.scrollBar: false
+URxvt.urgentOnBell: true
+URxvt.secondaryScroll: false
 URxvt.secondaryWheel: true
 
 ! When scrolling up the scrollback, new lines will not scroll back to
@@ -102,7 +102,7 @@ URxvt.keysym.M-quotedbl: perl:aAtt:undo
 URxvt.keysym.M-C-apostrophe: perl:aAtt:undo
 URxvt.keysym.M-apostrophe: perl:aAtt:surround-complete
 
-URxvt*keysym.M-o: perl:cwd-spawn
+URxvt.keysym.M-o: perl:cwd-spawn
 
 ! Match the git branch in zsh $RPS1
 URxvt.selection.pattern-0: : ?([^:]*)
