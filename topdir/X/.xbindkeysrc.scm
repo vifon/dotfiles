@@ -28,7 +28,7 @@
                  allowed-sessions))))
 
 (unless (session? "emacs")
-  (bindkeys "sh -c 'exec urxvtcd || exec urxvt'"
+  (bindkeys "alacritty"
             '(mod4 space))
 
   (bindkeys "emacsclient -c -a ''"
@@ -98,7 +98,7 @@
           "c:208"
           "c:209")
 
-(bindkeys "urxvtcd -title IRC -e wbd"
+(bindkeys "alacritty --title IRC -e wbd"
           '(mod4 F10))
 (bindkeys "urxvtcd -title 'IRC [mosh]' -e wbd --mosh"
           '(mod4 control F10))

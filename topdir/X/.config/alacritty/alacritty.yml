@@ -1,0 +1,56 @@
+# selection:
+#   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+#   save_to_clipboard: false
+
+mouse:
+  hide_when_typing: true
+  url:
+    launcher:
+      program: webbrowser-dwim
+
+key_bindings:
+  - key: O
+    mods: Alt
+    action: SpawnNewInstance
+  - key: C
+    mods: Control|Alt
+    action: Copy
+  - key: V
+    mods: Control|Alt
+    action: Paste
+
+font:
+  normal:
+    family: JetBrains Mono
+  size: 13
+
+window:
+  padding:
+    x: 1
+    y: 2
+
+draw_bold_text_with_bright_colors: true
+colors:
+  primary:
+    background: '#000000'
+    foreground: '#eaeaea'
+  selection:
+    background: '#5555ff'
+  normal:
+    black:   '#111111'
+    red:     '#dc0000'
+    green:   '#00cc00'
+    yellow:  '#c4a000'
+    blue:    '#4276b8'
+    magenta: '#95709b'
+    cyan:    '#0b939b'
+    white:   '#d3d7cf'
+  bright:
+    black:   '#555753'
+    red:     '#ef2929'
+    green:   '#00ff00'
+    yellow:  '#fce94f'
+    blue:    '#729fcf'
+    magenta: '#ad7fa8'
+    cyan:    '#00f5e9'
+    white:   '#eeeeec'
