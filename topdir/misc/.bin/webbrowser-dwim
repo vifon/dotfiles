@@ -18,15 +18,12 @@ case $CODE in
 esac
 
 if [[ "$MIME" =~ 'image/' ]]; then
+    notify-send Dispatcher "Image"
     exec webrun sxiv "$URL"
 elif [[ "$MIME" =~ 'application/pdf' ]]; then
+    notify-send Dispatcher "PDF"
     exec webrun evince "$URL"
 elif [[ "$MIME" =~ 'text/plain' ]]; then
+    notify-send Dispatcher "Plaintext"
     exec webrun e "$URL"
-else
-    if [ "`ps -p $PPID -o comm=`" = "urxvtd" ]; then
-        # exec $=MINIBROWSER "$URL"
-    else
-        exec $=FULLBROWSER "$URL"
-    fi
 fi
