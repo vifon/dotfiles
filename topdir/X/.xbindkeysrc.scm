@@ -101,7 +101,9 @@
 (bindkeys "alacritty --title IRC -e irc"
           '(mod4 F10))
 
-(bindkeys "dmenu_launcher"
+(bindkeys "keepassxc"
+          '(mod4 shift y))
+(bindkeys "yubi-oath"
           '(mod4 y))
 
 (bindkeys "dmenu_translate -g"
