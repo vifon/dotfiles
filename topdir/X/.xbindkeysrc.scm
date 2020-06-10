@@ -101,6 +101,9 @@
 (bindkeys "alacritty --title IRC -e irc"
           '(mod4 F10))
 
+(bindkeys "pkill -HUP xbindkeys"
+          '(mod4 mod5 shift r))
+
 (bindkeys "keepassxc"
           '(mod4 shift y))
 (bindkeys "yubi-oath"
