@@ -59,8 +59,11 @@
           'Scroll_Lock)
 
 (unless (session? "xmonad")
-  (bindkeys "firefox -P default"
+  (bindkeys "firefox -P default --private-window"
             '(mod4 control shift o)))
+
+(bindkeys "firefox-vanilla"
+          '(mod4 mod5 control shift o))
 
 (let ((i3lock "i3lock -c 222222 -m --show-failed-attempts"))
   (bindkeys i3lock
