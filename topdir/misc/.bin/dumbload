@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import argparse
+import random
+import string
+import subprocess
+
+
+def get_urls(files):
+    for f in files:
+        yield f'https://vifon.einval.eu/upload/{f.name}'
+
+
+def randomize_names(files):
+    def new_name():
+        return "".join(random.choices(
+            "".join([
+                string.ascii_uppercase,
+                string.ascii_lowercase,
+                string.digits,
+            ]),
+            k=24,
+        ))
+
+    for f in files:
+        yield f.parent / '{}{}'.format(new_name(), "".join(f.suffixes))
+
+
+def send(*files, target=''):
+    subprocess.check_call([
+        'rsync',
+        '-v',
+        '--',
+        *files,
+        f'einval.eu:public_html/upload/{target}',
+    ])
+
+
+def ExistingPath(path_str):
+    path = Path(path_str)
+    if path.exists():
+        return path
+    else:
+        raise argparse.ArgumentTypeError(f'"{path}" doesn\'t exist.')
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--random-name', '-r', action='store_true')
+    parser.add_argument('--delete', '-c', action='store_true')
+    parser.add_argument('--no-clipboard', action='store_true')
+    parser.add_argument('files', nargs='*', type=ExistingPath)
+    args = parser.parse_args()
+
+    files = args.files
+
+    if args.random_name:
+        print("Randomizing the filenames…")
+        new_files = list(randomize_names(files))
+        urls = "\n".join(get_urls(new_files))
+        for old, new in zip(files, new_files):
+            send(old, target=new)
+    else:
+        urls = "\n".join(get_urls(files))
+        send(*files)
+    print()
+
+    if args.delete:
+        print("Removing files… ", end='')
+        for f in files:
+            f.unlink()
+        print("DONE")
+        print()
+
+    if not args.no_clipboard:
+        for extra_args in [[], ['-b']]:
+            xsel = subprocess.Popen(
+                ['xsel', *extra_args],
+                stdin=subprocess.PIPE,
+                universal_newlines=True,
+            )
+            xsel.communicate(urls)
+        print("Stored the URLs in clipboard.")
+        print()
+
+    print(urls)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+finish() {
+    rm -f "$FILE" "$NEW_FILE"
+    exit
+}; trap finish EXIT INT TERM
+
+set -e
+if [ -n "$1" ]; then
+    FILE="$(scrot '/tmp/%Y-%m-%d-%H%M%S-MD5HERE.png' -e 'echo $f')"
+else
+    FILE="$(scrot -s '/tmp/%Y-%m-%d-%H%M%S-MD5HERE.png' -e 'echo $f')"
+fi
+set +e
+
+# Ensure even a very quick file save is detected.
+touch -d 'second ago' "$FILE"
+
+MTIME_OLD="$(stat -c %Y "$FILE")"
+mtpaint "$FILE" || gimp "$FILE"
+MTIME_NEW="$(stat -c %Y "$FILE")"
+
+xclip -i -selection clipboard -t image/png < "$FILE"
+
+if [ "$MTIME_OLD" != "$MTIME_NEW" ]; then
+    MD5=`md5sum "$FILE" | perl -naE 'say substr $F[0], 0, 6'`
+    NEW_FILE="${FILE/MD5HERE/$MD5}"
+    mv "$FILE" "$NEW_FILE"
+    imgclip "$NEW_FILE" & disown
+    dumbload --no-clipboard "$NEW_FILE"
+    notify-send "File uploaded"
+fi
