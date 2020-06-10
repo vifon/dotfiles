@@ -98,10 +98,8 @@
           "c:208"
           "c:209")
 
-(bindkeys "alacritty --title IRC -e wbd"
+(bindkeys "alacritty --title IRC -e irc"
           '(mod4 F10))
-(bindkeys "urxvtcd -title 'IRC [mosh]' -e wbd --mosh"
-          '(mod4 control F10))
 
 (bindkeys "dmenu_launcher"
           '(mod4 y))
