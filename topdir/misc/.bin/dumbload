@@ -24,7 +24,7 @@ def randomize_names(files):
         ))
 
     for f in files:
-        yield f.parent / '{}{}'.format(new_name(), "".join(f.suffixes))
+        yield Path('{}{}'.format(new_name(), f.suffix))
 
 
 def send(*files, target=''):
