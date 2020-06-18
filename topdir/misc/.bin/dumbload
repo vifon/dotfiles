@@ -31,6 +31,7 @@ def send(*files, target=''):
     subprocess.check_call([
         'rsync',
         '-v',
+        '-L',
         '--',
         *files,
         f'einval.eu:public_html/upload/{target}',
