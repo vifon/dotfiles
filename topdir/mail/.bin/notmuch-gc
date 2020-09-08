@@ -14,6 +14,7 @@ def remove_mail(query):
         [
             "notmuch",
             "search",
+            "--exclude=false",
             "--output=files",
             "--format=text0",
             "--",
@@ -32,6 +33,7 @@ def fake_remove_mail(query):
         [
             "notmuch",
             "search",
+            "--exclude=false",
             "--",
             *query,
         ],
