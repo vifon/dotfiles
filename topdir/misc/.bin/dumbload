@@ -67,25 +67,26 @@ def main():
         send(*files)
     print()
 
-    if args.delete:
-        print("Removing files… ", end='')
-        for f in files:
-            f.unlink()
-        print("DONE")
-        print()
+    try:
+        if args.delete:
+            print("Removing files… ", end='')
+            for f in files:
+                f.unlink()
+            print("DONE")
+            print()
 
-    if not args.no_clipboard:
-        for extra_args in [[], ['-b']]:
-            xsel = subprocess.Popen(
-                ['xsel', *extra_args],
-                stdin=subprocess.PIPE,
-                universal_newlines=True,
-            )
-            xsel.communicate(urls)
-        print("Stored the URLs in clipboard.")
-        print()
-
-    print(urls)
+        if not args.no_clipboard:
+            for extra_args in [[], ['-b']]:
+                xsel = subprocess.Popen(
+                    ['xsel', *extra_args],
+                    stdin=subprocess.PIPE,
+                    universal_newlines=True,
+                )
+                xsel.communicate(urls)
+            print("Stored the URLs in clipboard.")
+            print()
+    finally:
+        print(urls)
 
 
 if __name__ == "__main__":
