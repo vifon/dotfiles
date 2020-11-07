@@ -27,6 +27,10 @@ if [ "$MTIME_OLD" != "$MTIME_NEW" ] && zenity --question --title 'Image Upload' 
     NEW_FILE="${FILE/MD5HERE/$MD5}"
     mv "$FILE" "$NEW_FILE"
     imgclip "$NEW_FILE" & disown
-    dumbload --no-clipboard "$NEW_FILE"
+    while ! dumbload --no-clipboard "$NEW_FILE"; do
+        if ! zenity --question --title 'Image Upload' --text 'Upload failed. Retry?'; then
+            exit
+        fi
+    done
     notify-send "File uploaded"
 fi
