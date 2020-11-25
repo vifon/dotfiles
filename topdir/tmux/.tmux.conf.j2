@@ -54,14 +54,6 @@ bind % split-window -h -c '#{pane_current_path}'
 bind c new-window -c '#{pane_current_path}'
 {%- endif %}
 
-bind -r tab select-pane -t :.+
-bind -r C-q select-pane -t :.+
-bind ` select-window -t :0
-bind m setw monitor-activity
-bind M command-prompt -p "(monitor-content)" "setw monitor-content %%"
-bind @ setw automatic-rename
 bind r source-file ~/.tmux.conf
-bind / command-prompt "join-pane -t %%; move-window -t 0"
-bind ! break-pane
 
 bind M-c new-session
