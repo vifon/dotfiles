@@ -1,0 +1,12 @@
+beets
+bs4
+flake8
+jupyter
+Markdown
+matplotlib
+num2words
+pandas
+pelican
+pipenv
+pylint
+youtube-dl
