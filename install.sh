@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 preprocess_configs() {
     local CONF_FILE
