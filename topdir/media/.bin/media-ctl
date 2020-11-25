@@ -5,7 +5,7 @@ shift
 MPD_COMMAND=${1:-$MPRIS_COMMAND}
 shift
 
-if [ -n "$(mpris-ctl list 2> /dev/null)" ]; then
+if MPRIS="$(mpris-ctl list 2>&1)" && [ -n "$MPRIS" ]; then
     mpris-ctl "$MPRIS_COMMAND"
     mpcauth -q pause
 else
