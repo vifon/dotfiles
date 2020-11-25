@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec media-ctl Stop stop
+exec media-ctl stop
