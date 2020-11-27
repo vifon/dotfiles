@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 shopt -s nullglob
 
 PIDFILE="/tmp/ncmpcpp-cover-$UID-$WINDOWID.pid"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PIDFILE="/tmp/redshift-toggle-$UID.pid"
 

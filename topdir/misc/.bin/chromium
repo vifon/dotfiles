@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export LIBGL_DRI3_DISABLE=1
 

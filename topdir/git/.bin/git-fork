@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+
+set -e
 
 FEATURE=$1
 PROJECT=`basename $PWD`
