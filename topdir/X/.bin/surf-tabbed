@@ -1,5 +1,3 @@
 #!/bin/bash
 
-export GTK_THEME=default
-
 exec tabbed -n surf surf -e
