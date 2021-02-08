@@ -67,6 +67,7 @@ def main():
         urls = "\n".join(get_urls(files))
         send(*files)
     print()
+    subprocess.check_call(["notify-send", "File uploaded"])
 
     try:
         if args.delete:

@@ -32,5 +32,4 @@ if [ "$MTIME_OLD" != "$MTIME_NEW" ] && zenity --question --title 'Image Upload' 
             exit
         fi
     done
-    notify-send "File uploaded"
 fi
