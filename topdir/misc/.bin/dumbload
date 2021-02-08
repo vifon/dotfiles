@@ -78,7 +78,7 @@ def main():
         if not args.no_clipboard:
             for extra_args in [[], ['-b']]:
                 xsel = subprocess.Popen(
-                    ['xsel', *extra_args],
+                    ['xsel', '-i', *extra_args],
                     stdin=subprocess.PIPE,
                     universal_newlines=True,
                 )
