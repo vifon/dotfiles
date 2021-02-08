@@ -9,7 +9,7 @@ import subprocess
 
 def get_urls(files):
     for f in files:
-        yield f'https://vifon.einval.eu/upload/{f.name}'
+        yield f'https://einval.eu/upload/{f.name}'
 
 
 def randomize_names(files):
