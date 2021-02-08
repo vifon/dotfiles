@@ -32,6 +32,7 @@ def send(*files, target=''):
         'rsync',
         '-v',
         '-L',
+        '--chmod=og+r',
         '--',
         *files,
         f'einval.eu:public_html/upload/{target}',
