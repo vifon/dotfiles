@@ -26,7 +26,7 @@ if [ "$MTIME_OLD" != "$MTIME_NEW" ] && zenity --question --title 'Image Upload' 
     MD5=`md5sum "$FILE" | perl -naE 'say substr $F[0], 0, 6'`
     NEW_FILE="${FILE/MD5HERE/$MD5}"
     mv "$FILE" "$NEW_FILE"
-    imgclip "$NEW_FILE" & disown
+    imgclip "$NEW_FILE" https://einval.eu/upload/ & disown
     while ! dumbload --no-clipboard "$NEW_FILE"; do
         if ! zenity --question --title 'Image Upload' --text 'Upload failed. Retry?'; then
             exit
