@@ -5,11 +5,12 @@ finish() {
     exit
 }; trap finish EXIT INT TERM
 
+FILE="/tmp/$(date '+%Y-%m-%d-MD5HERE.png')"
 set -e
 if [ -n "$1" ]; then
-    FILE="$(scrot '/tmp/%Y-%m-%d-%H%M%S-MD5HERE.png' -e 'echo $f')"
+    maim --hidecursor "$FILE"
 else
-    FILE="$(scrot -s '/tmp/%Y-%m-%d-%H%M%S-MD5HERE.png' -e 'echo $f')"
+    maim --hidecursor -s "$FILE"
 fi
 set +e
 
