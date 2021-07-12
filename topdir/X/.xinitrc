@@ -7,6 +7,17 @@ if [ -z "$SESSION" ]; then
     export SESSION=xmonad
 fi
 
+# It's possible to specify the actual WM to run to be different than
+# the name of the session, that's chacked in some places, like
+# xbindkeys.  For example "none+xmonad" would only initialize the
+# environment and tell other processes that we're running XMonad, but
+# won't launch it, leaving it to some other initialization scripts
+# that probably source this one.
+SESSION_WM="${SESSION%%+*}"
+export SESSION="${SESSION#*+}"
+
+export PATH="$(zsh -c 'echo $PATH')"
+
 xrdb ~/.Xresources
 
 screen-settings() {
@@ -14,7 +25,7 @@ screen-settings() {
 
     xrandr --output eDP-1 --primary --auto --output DP-1-2 --off
 
-    if [ -e "$HOME/.fehbg" ]; then
+    if [ -x "$HOME/.fehbg" ]; then
         ~/.fehbg
     else
         feh --bg-scale ~/images/wallpapers/wall.png
@@ -45,20 +56,15 @@ start-daemons() {
 
 lockscreen-settings() {
     xset dpms 590 600 600
-    xsidle.sh zsh -c "exec i3lock -c 222222 --show-failed-attempts" &
+    xsidle.sh exec i3lock -c 222222 --show-failed-attempts &
 }
 
 keyboard-settings() {
-    zsh -c 'exec xbindkeys' &
+    xbindkeys &
     rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
     setxkbmap pl -option ctrl:nocaps &
     xset r rate 300 30 &
     numlockx on
-    if xinput list | grep -q 'Logitech USB Trackball'; then
-        xset m 5 5
-    else
-        xset m default
-    fi
 }
 
 screen-settings
@@ -67,15 +73,25 @@ lockscreen-settings
 keyboard-settings
 start-daemons
 
+
 case $SESSION in
     xmonad)
         stalonetray &
+        ;;
+esac
+
+case $SESSION_WM in
+    none)
+        :
+        ;;
+    xmonad)
         emacs --daemon &
-        exec zsh -c 'exec xmonad'
+        exec xmonad
         ;;
     emacs)
-        exec zsh -c "exec emacs --eval \"(require 'my-exwm)\""
+        exec emacs --eval "(require 'my-exwm)"
         ;;
     *)
-        exec zsh -c "exec $SESSION" ;;
+        exec $SESSION_WM
+        ;;
 esac
