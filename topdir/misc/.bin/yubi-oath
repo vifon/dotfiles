@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit -o nounset -o pipefail
+
+SERVICE=$(ykman oath accounts list | dmenu -i -f -l 16)
+
+CODE=$(ykman oath accounts code "$SERVICE" | awk '{ print $NF }')
+notify-send Yubikey "$CODE"
+echo -n "$CODE" | xsel -i -b
+echo -n "$CODE" | xsel -i -p
+
+(
+    sleep 30
+    xsel -c -b
+    xsel -c -p
+) &
