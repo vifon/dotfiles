@@ -5,11 +5,13 @@ import argparse
 import random
 import string
 import subprocess
+import urllib.parse
 
 
 def get_urls(files):
     for f in files:
-        yield f'https://einval.eu/upload/{f.name}'
+        quoted = urllib.parse.quote(f.name)
+        yield f'https://einval.eu/upload/{quoted}'
 
 
 def randomize_names(files):
