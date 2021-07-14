@@ -128,9 +128,9 @@
 (bindkeys "zsh -c 'urxvt -e less -R =(trans en:pl \\\"`xsel -o`\\\")'"
           '(mod4 control backslash))
 
-(bindkeys "scrot-upload"
+(bindkeys "maim -u -s | pngquant - | xclip -i -selection clipboard -t image/png"
           '(release Print))
-(bindkeys "scrot-upload 1"
+(bindkeys "scrot-upload"
           '(release mod4 Print))
 (bindkeys "scrot -s"
           '(release control Print))
