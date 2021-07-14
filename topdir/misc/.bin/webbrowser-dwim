@@ -5,7 +5,7 @@ FULLBROWSER="webbroboard"
 
 URL=$1
 $=MINIBROWSER "$URL"
-RESPONSE=$(curl -s -I $URL)
+RESPONSE=$(curl -s -I -L $URL)
 MIME=$(sed -n 's/^Content-Type: \([^;]*\).*/\1/ip' <<< $RESPONSE)
 
 CODE=$(sed -n 's/^HTTP\/[.0-9]\+ \([0-9]*\) .*/\1/ip' <<< $RESPONSE)
