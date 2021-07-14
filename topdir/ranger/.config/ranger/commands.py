@@ -34,7 +34,7 @@ class terminal(Command):
 class edit(Command):
     """:edit <filename>
 
-    Opens the specified file in vim
+    Opens the specified path in vim
     """
 
     def execute(self):
@@ -69,7 +69,7 @@ class fzf_select(Command):
     """
     :fzf_select
 
-    Find a file using fzf.
+    Find a path using fzf.
 
     With a prefix argument select only directories.
 
@@ -118,7 +118,7 @@ class copy_content(Command):
     """
     :copy_content
 
-    Copies to clipboard either a file's contents or the directory tree (as an ascii-art).
+    Copies to clipboard either a path's contents or the directory tree (as an ascii-art).
     """
     def execute(self):
         import subprocess
@@ -137,15 +137,29 @@ class copy_content(Command):
 class TreeLinemode(LinemodeBase):
     name = "tree"
 
-    def filetitle(self, file, metadata):
-        return "  " * file.relative_path.count("/", 0) + file.basename
+    def filetitle(self, path, metadata):
+        return "  " * path.relative_path.count("/", 0) + path.basename
+
+
+from ranger.core.linemode import DefaultLinemode
+
+@register_linemode
+class SymlinkLinemode(DefaultLinemode):
+    name = "symlink"
+
+    def filetitle(self, path, metadata):
+        if path.is_link:
+            return "{} -> {}".format(path.relative_path, path.infostring)
+        else:
+            return super().filetitle(path, metadata)
+
 
 class selfdebug(Command):
     def execute(self):
         import pdb
         from subprocess import check_output
         from sys import stdout
-        term_reset_string = check_output(["reset"])
+        term_reset_string = check_output(["reset"], universal_newlines=True)
         stdout.write(term_reset_string)
         pdb.set_trace()
         self.fm.exit()
