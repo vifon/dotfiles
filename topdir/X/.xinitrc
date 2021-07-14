@@ -76,6 +76,7 @@ start-daemons
 
 case $SESSION in
     xmonad)
+        emacs --daemon &
         stalonetray &
         ;;
 esac
@@ -85,7 +86,6 @@ case $SESSION_WM in
         :
         ;;
     xmonad)
-        emacs --daemon &
         exec xmonad
         ;;
     emacs)
