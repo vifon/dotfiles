@@ -80,7 +80,8 @@
 (bindkeys "amixer set Speaker toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
           '(mod1 XF86AudioMute))
 (bindkeys "amixer set Capture toggle | grep -o '\\[on\\]\\|\\[off\\]' | head -n1 | xargs notify-send"
-          'XF86AudioMicMute)
+          'XF86AudioMicMute
+          '(shift XF86AudioMute))
 (bindkeys "amixer -D pulse set Master 5%- && killall -USR1 i3status"
           'XF86AudioLowerVolume)
 (bindkeys "amixer -D pulse set Master 5%+ && killall -USR1 i3status"
@@ -91,6 +92,10 @@
 (bindkeys "media-next"
           '(mod4 control period)
           'XF86AudioNext)
+(bindkeys "media-seek-backward"
+          'XF86AudioRewind)
+(bindkeys "media-seek-forward"
+          'XF86AudioForward)
 (bindkeys "media-stop"
           '(mod4 control slash)
           'XF86AudioStop)
@@ -100,6 +105,8 @@
           'XF86AudioPlay
           "c:208"
           "c:209")
+(bindkeys "mpcauth toggle"
+          '(mod4 XF86AudioPlay))
 
 (bindkeys "alacritty --title IRC -e irc"
           '(mod4 F10))
