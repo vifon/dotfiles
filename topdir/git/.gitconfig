@@ -2,13 +2,15 @@
 # vim: fdm=marker :
 [include]
     path = ~/.gitauth
+[init]
+    defaultBranch = master
 [color]
     ui = true
 [color.diff]
     meta = yellow bold
     func = magenta bold
 [core]
-    pager  = less
+    pager  = less -RFS
     excludesfile = ~/.gitignore
     quotepath = false
 [mergetool.emacs]
@@ -22,9 +24,11 @@
     keepTemporaries = false
     trustExitCode = false
     keepBackup = false
+[mergetool.mymeld]
+    cmd = meld --auto-merge --output \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" --diff \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [merge]
-    tool = meld
-
+    tool = mymeld
+    conflictstyle = diff3
 
 [difftool.p4merge]
     cmd = "p4merge $LOCAL $REMOTE"
@@ -32,7 +36,10 @@
     prompt = false
 [diff]
     tool = meld
-
+[diff "lisp"]
+  xfuncname = "^(\\(.*)$"
+[diff "org"]
+  xfuncname = "^(\\*+.*)$"
 
 [push]
     default = simple
@@ -40,19 +47,14 @@
     autosquash = true
 
 [alias]
-    unstage        = reset HEAD --
     visual         = !gitk --all
     cd             = checkout
     ls             = status --short
     a              = add
-    au             = add --update
     ap             = add --patch
     co             = commit
     coa            = commit --amend
-    coam           = commit --amend --no-edit
     com            = commit -m
-    r              = rebase
-    ri             = !GIT_EDITOR=vim git rebase -i
     quicklog       = !git log --decorate --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset %C(bold blue)<%an>%Creset %Cgreen(%ar)%Creset %s' | head -n 30
     ql             = !git quicklog
     graph          = "!fun() { git log --graph --decorate --color --pretty=format:'%C(auto)%h%Creset %C(bold blue)<%<(10,trunc)%an>%Creset %Cgreen(%<(14,trunc)%ar)%Creset%C(auto)%d%Creset %s' \"$@\"; }; fun"
@@ -67,12 +69,13 @@
     forget         = rm --cached
     rescue         = !git rev-list -g --all | xargs git graph
     rescuek        = !git rev-list -g --all | xargs gitk
-    f              = "!fun() { git forest --sha \"$@\" | less -RXFS; }; fun"
+    f              = "!fun() { git forest --sha \"$@\" | less -RFS; }; fun"
     ff             = merge --ff-only '@{u}'
     unmerged       = branch --no-merged
     merged         = branch --merged
     unfuck         = reset --hard '@{1}'
     rape           = !git add -A && git commit --amend --no-edit && git push --force-with-lease
+    quickpull      = pull --rebase --autostash
 
     tar            = "!f(){ local NAME; NAME=$(basename $(git rev-parse --show-toplevel)); git archive --format=tar --prefix=$NAME/ HEAD | gzip > $NAME.tar.gz; echo \"Archive produced: $NAME.tar.gz\"; }; f"
 
