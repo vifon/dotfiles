@@ -110,6 +110,8 @@
 
 (bindkeys "alacritty --title IRC -e irc"
           '(mod4 F10))
+(bindkeys "alacritty --title 'IRC (mosh)' -e irc --mosh"
+          '(mod4 control F10))
 
 (bindkeys "pkill -HUP xbindkeys"
           '(mod4 mod5 shift r))
