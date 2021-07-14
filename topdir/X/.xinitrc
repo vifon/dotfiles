@@ -61,7 +61,6 @@ lockscreen-settings() {
 
 keyboard-settings() {
     xbindkeys &
-    rofi -key-window SuperL+n -modi window,ssh,run -terminal urxvtcd &
     setxkbmap pl -option ctrl:nocaps &
     xset r rate 300 30 &
     numlockx on
