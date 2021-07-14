@@ -15,6 +15,10 @@ case $CODE in
         notify-send Dispatcher "404: Not Found"
         exit 1
         ;;
+    40?|50?)
+        notify-send Dispatcher "Error $CODE"
+        exit 1
+        ;;
 esac
 
 if [[ "$MIME" =~ 'image/' ]]; then
