@@ -137,6 +137,9 @@
 (bindkeys "scrot -s --exec 'mtpaint $f; rm -f $f'"
           '(release mod5 Print))
 
+(bindkeys "clipboard-actions"
+          '(mod4 v))
+
 (bindkeys "xset r rate 300 30"
           '(mod4 Insert))
 
