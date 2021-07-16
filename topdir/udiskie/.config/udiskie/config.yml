@@ -1,0 +1,7 @@
+program_options:
+  tray: true
+  automount: false
+  file_manager: ee
+device_config:
+  - is_loop: true
+    ignore: true

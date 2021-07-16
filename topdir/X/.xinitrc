@@ -51,7 +51,7 @@ ssh-agent-settings() {
 start-daemons() {
     nm-applet &> /dev/null &
     dunst &
-    udiskie --no-automount --tray --file-manager=ee &
+    udiskie &
     mpd 2> /dev/null &
 }
 
