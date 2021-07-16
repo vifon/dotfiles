@@ -65,7 +65,7 @@
 (bindkeys "firefox-vanilla"
           '(mod4 mod5 control shift o))
 
-(let ((i3lock "i3lock -c 222222 -m --show-failed-attempts"))
+(let ((i3lock "i3lock -c 222222 --show-failed-attempts"))
   (bindkeys i3lock
             '(release XF86ScreenSaver)
             '(release control shift mod4 l))
