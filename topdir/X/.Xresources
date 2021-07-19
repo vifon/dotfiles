@@ -12,6 +12,9 @@ Emacs.font: DejaVu Sans Mono-11
 
 dzen2.font: Bitstream Vera Sans Mono:bold:size=12
 
+Sxiv.foreground: #eeeeee
+Sxiv.background: #555555
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!! urxvt !!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!
