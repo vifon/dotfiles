@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-export LIBGL_DRI3_DISABLE=1
-
-if [ -x /usr/bin/chromium ]; then
-    exec /usr/bin/chromium "$@"
-else
-    exec /usr/bin/chromium-browser "$@"
-fi
