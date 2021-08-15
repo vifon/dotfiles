@@ -57,7 +57,7 @@ start-daemons() {
 
 lockscreen-settings() {
     xset dpms 590 600 600
-    xsidle.sh exec i3lock -c 222222 --show-failed-attempts &
+    xss-lock -- i3lock -c 222222 -m --show-failed-attempts -n &
 }
 
 keyboard-settings() {
