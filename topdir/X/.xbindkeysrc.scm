@@ -75,16 +75,14 @@
 
 (bindkeys "mpc-rand"
           '(mod4 shift mod5 m))
-(bindkeys "amixer -D pulse set Master Playback Switch toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
+(bindkeys "pamixer -t"
           'XF86AudioMute)
-(bindkeys "amixer set Speaker toggle &> /dev/null && sleep 0.1 && killall -USR1 i3status"
-          '(mod1 XF86AudioMute))
 (bindkeys "amixer set Capture toggle | grep -o '\\[on\\]\\|\\[off\\]' | head -n1 | xargs notify-send"
           'XF86AudioMicMute
           '(shift XF86AudioMute))
-(bindkeys "amixer -D pulse set Master 5%- && killall -USR1 i3status"
+(bindkeys "pamixer -d 3"
           'XF86AudioLowerVolume)
-(bindkeys "amixer -D pulse set Master 5%+ && killall -USR1 i3status"
+(bindkeys "pamixer -i 3"
           'XF86AudioRaiseVolume)
 (bindkeys "media-prev"
           '(mod4 control comma)
