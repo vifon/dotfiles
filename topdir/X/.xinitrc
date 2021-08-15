@@ -27,8 +27,6 @@ screen-settings() {
 
     if [ -x "$HOME/.fehbg" ]; then
         ~/.fehbg
-    else
-        feh --bg-scale ~/images/wallpapers/wall.png
     fi
 
     light -S 40
