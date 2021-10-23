@@ -87,7 +87,7 @@ case $SESSION_WM in
         exec xmonad
         ;;
     emacs)
-        exec emacs --eval "(require 'my-exwm)"
+        exec emacs --eval '(vifon/exwm-activate)'
         ;;
     *)
         exec $SESSION_WM
