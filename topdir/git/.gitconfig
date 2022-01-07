@@ -73,7 +73,7 @@
     ff             = merge --ff-only '@{u}'
     unmerged       = branch --no-merged
     merged         = branch --merged
-    unfuck         = reset --hard '@{1}'
+    unfuck         = reset --hard --keep '@{1}'
     rape           = !git add -A && git commit --amend --no-edit && git push --force-with-lease
     quickpull      = pull --rebase --autostash
 
