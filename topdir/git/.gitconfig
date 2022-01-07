@@ -81,15 +81,7 @@
 
     ribbon         = tag --force _ribbon origin/master
     catchup        = log --patch --reverse --topo-order _ribbon..origin/master
-[gui]
-    spellingdictionary = none
 [advice]
     detachedHead = false
-[instaweb]
-    browser = luakit
-    httpd = lighttpd
-    port = 30080
-[browser.luakit]
-    cmd = luakit
 [magit]
     hideCampaign = true
