@@ -74,7 +74,7 @@
     unmerged       = branch --no-merged
     merged         = branch --merged
     unfuck         = reset --hard --keep '@{1}'
-    rape           = !git add -A && git commit --amend --no-edit && git push --force-with-lease
+    pls-work-this-time = !git add -A && git commit --amend --no-edit && git push --force-with-lease
     quickpull      = pull --rebase --autostash
 
     tar            = "!f(){ local NAME; NAME=$(basename $(git rev-parse --show-toplevel)); git archive --format=tar --prefix=$NAME/ HEAD | gzip > $NAME.tar.gz; echo \"Archive produced: $NAME.tar.gz\"; }; f"
