@@ -62,6 +62,9 @@
   (bindkeys "firefox -P default --private-window"
             '(mod4 control shift o)))
 
+(bindkeys "dmenu_run -f -l 16"
+          '(mod4 r))
+
 (bindkeys "firefox-vanilla"
           '(mod4 mod5 control shift o))
 
