@@ -50,6 +50,7 @@
     visual         = !gitk --all
     cd             = checkout
     ls             = status --short
+    ignored        = status --short --ignored=matching
     a              = add
     ap             = add --patch
     co             = commit
@@ -75,7 +76,9 @@
     merged         = branch --merged
     unfuck         = reset --keep '@{1}'
     pls-work-this-time = !git add -A && git commit --amend --no-edit && git push --force-with-lease
-    quickpull      = pull --rebase --autostash
+
+    yoink          = "!f(){ set -x; git pull --rebase --autostash origin \"${1:-master}\"; }; f"
+    yeet           = "!f(){ set -x; git push --force-with-lease origin \"${1:-HEAD}\"; }; f"
 
     tar            = "!f(){ local NAME; NAME=$(basename $(git rev-parse --show-toplevel)); git archive --format=tar --prefix=$NAME/ HEAD | gzip > $NAME.tar.gz; echo \"Archive produced: $NAME.tar.gz\"; }; f"
 
