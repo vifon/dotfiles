@@ -4,7 +4,7 @@ set -o errexit -o nounset -o pipefail
 
 SERVICE=$(ykman oath accounts list | dmenu -i -f -l 16)
 
-CODE=$(ykman oath accounts code "$SERVICE" | awk '{ print $NF }')
+CODE=$(ykman oath accounts code --single "$SERVICE")
 notify-send Yubikey "$CODE"
 echo -n "$CODE" | xsel -i -b
 echo -n "$CODE" | xsel -i -p
