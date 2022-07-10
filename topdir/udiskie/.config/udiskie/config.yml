@@ -2,6 +2,11 @@ program_options:
   tray: true
   automount: false
   file_manager: ee
+  menu: flat
+  terminal: alacritty --working-directory
+
 device_config:
   - is_loop: true
     ignore: true
+
+quickmenu_actions: all
